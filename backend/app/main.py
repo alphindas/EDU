@@ -13,6 +13,10 @@ from .routers import (
 @asynccontextmanager
 async def lifespan(_: FastAPI):
     Base.metadata.create_all(engine)  # swap for Alembic migrations before Postgres
+    if get_settings().seed_demo:
+        from .seed import ensure_demo_data
+
+        ensure_demo_data()
     yield
 
 
@@ -20,6 +24,7 @@ app = FastAPI(title="EduNest API", version="0.4.0", lifespan=lifespan)
 app.add_middleware(
     CORSMiddleware,
     allow_origins=get_settings().cors_origins,
+    allow_origin_regex=get_settings().cors_origin_regex or None,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],

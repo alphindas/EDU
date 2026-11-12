@@ -1,16 +1,37 @@
 from functools import lru_cache
+from typing import Annotated
 
-from pydantic_settings import BaseSettings, SettingsConfigDict
+from pydantic import AliasChoices, Field, field_validator
+from pydantic_settings import BaseSettings, NoDecode, SettingsConfigDict
 
 
 class Settings(BaseSettings):
     model_config = SettingsConfigDict(env_file=".env", env_prefix="EDUNEST_", extra="ignore")
 
-    database_url: str = "sqlite:///./edunest.db"
-    secret_key: str = "dev-only-change-me-in-production-please-32b+"
+    # Hosting platforms set plain DATABASE_URL / SECRET_KEY; the EDUNEST_ prefixed names also work.
+    database_url: str = Field("sqlite:///./edunest.db", validation_alias=AliasChoices("EDUNEST_DATABASE_URL", "DATABASE_URL"))
+    secret_key: str = Field("dev-only-change-me-in-production-please-32b+", validation_alias=AliasChoices("EDUNEST_SECRET_KEY", "SECRET_KEY"))
     access_token_minutes: int = 15
     refresh_token_days: int = 7
-    cors_origins: list[str] = ["http://localhost:5173", "http://127.0.0.1:5173"]
+    # Exact origins (comma-separated or JSON list) plus a regex for preview/production hosts. Default regex allows any
+    # *.pages.dev (Cloudflare Pages); tighten to the exact URL once known. Auth is a bearer token (no cookies), so a
+    # broad origin list does not by itself expose sessions.
+    cors_origins: Annotated[list[str], NoDecode] = Field(
+        ["http://localhost:5173", "http://127.0.0.1:5173"], validation_alias=AliasChoices("EDUNEST_CORS_ORIGINS", "CORS_ORIGINS"))
+    cors_origin_regex: str = r"^https://([a-z0-9-]+\.)*pages\.dev$"
+    # Create demo school + logins on startup if the DB is empty (for ephemeral demo hosting only).
+    seed_demo: bool = Field(False, validation_alias=AliasChoices("EDUNEST_SEED_DEMO", "SEED_DEMO"))
+
+    @field_validator("cors_origins", mode="before")
+    @classmethod
+    def _split_origins(cls, v):
+        if isinstance(v, str):
+            v = v.strip()
+            if v.startswith("["):
+                import json
+                return json.loads(v)
+            return [x.strip().rstrip("/") for x in v.split(",") if x.strip()]
+        return v
 
     # OTP (parents). "dev" provider logs the code and always accepts dev_otp_code.
     otp_provider: str = "dev"

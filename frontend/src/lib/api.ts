@@ -5,12 +5,15 @@ export class ApiError extends Error {
   constructor(public status: number, message: string) { super(message); }
 }
 
+/** Backend origin. Empty in dev (Vite proxies /api). On Cloudflare Pages set VITE_API_URL=https://<service>.onrender.com at build time. */
+export const API_BASE = ((import.meta.env.VITE_API_URL as string | undefined) ?? "").replace(/\/+$/, "");
+
 let refreshing: Promise<boolean> | null = null;
 
 async function tryRefresh(): Promise<boolean> {
   const { refresh, setSession, logout } = useAuth.getState();
   if (!refresh) return false;
-  refreshing ??= fetch("/api/auth/refresh", {
+  refreshing ??= fetch(`${API_BASE}/api/auth/refresh`, {
     method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ refresh_token: refresh }),
   })
     .then(async (r) => {
@@ -28,7 +31,7 @@ export async function api<T = unknown>(path: string, init: RequestInit & { json?
   const headers = new Headers(init.headers);
   if (init.json !== undefined) headers.set("Content-Type", "application/json");
   if (access) headers.set("Authorization", `Bearer ${access}`);
-  const res = await fetch(`/api${path}`, { ...init, headers, body: init.json !== undefined ? JSON.stringify(init.json) : init.body });
+  const res = await fetch(`${API_BASE}/api${path}`, { ...init, headers, body: init.json !== undefined ? JSON.stringify(init.json) : init.body });
   if (res.status === 401 && retry && access && (await tryRefresh())) return api<T>(path, init, false);
   if (!res.ok) {
     let detail = res.statusText;
@@ -55,7 +58,7 @@ export const upload = <T,>(method: "POST" | "PUT", p: string, fd: FormData) => a
 /** Authenticated binary fetch (images/PDFs sit behind auth, so <img src> can't be used directly). */
 export async function fetchBlob(path: string, retry = true): Promise<Blob> {
   const { access } = useAuth.getState();
-  const res = await fetch(`/api${path}`, { headers: access ? { Authorization: `Bearer ${access}` } : {} });
+  const res = await fetch(`${API_BASE}/api${path}`, { headers: access ? { Authorization: `Bearer ${access}` } : {} });
   if (res.status === 401 && retry && access && (await tryRefresh())) return fetchBlob(path, false);
   if (!res.ok) throw new ApiError(res.status, res.statusText);
   return res.blob();

@@ -116,6 +116,18 @@ def seed_demo(db: Session, code: str = SCHOOL_CODE, name: str = "EduNest Demo Sc
     return school
 
 
+def ensure_demo_data() -> None:
+    """Idempotent: seed the demo school + superadmin only when the DB has no demo school yet (used at startup when
+    EDUNEST_SEED_DEMO=1, e.g. on a host whose SQLite file is wiped on every restart)."""
+    Base.metadata.create_all(engine)
+    with SessionLocal() as db:
+        if db.scalar(select(School).where(School.code == SCHOOL_CODE)):
+            return
+        db.add(User(school_id=None, role=Role.superadmin.value, login_id="super", full_name="Platform Admin",
+                    password_hash=hash_password("super12345")))  # fmt: skip
+        seed_demo(db)
+
+
 def main() -> None:
     Base.metadata.create_all(engine)
     db = SessionLocal()

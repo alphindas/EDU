@@ -11,6 +11,8 @@
 **Status:** Phases 1–2 done. Phase 1: schema, seed, 4-role login, RBAC, CRUD. Phase 2: attendance (manual + face bridge), timetable, homework, leave workflow, ID card QR, in-app notifications.
 Phase 3 (quizzes, exams, report card) is next.
 
+> **SQLite on Render's free tier is ephemeral — data resets on redeploy/restart. Fine for a demo, not for real use.**
+
 ## Run on WSL (no Docker) — 3 terminals
 
 One-time setup:
@@ -50,6 +52,10 @@ Set `EDUNEST_SECRET_KEY` in your shell for anything beyond a demo.
 | Student | `EN-26-001` … `EN-26-009` | DOB as `DDMMYYYY` (e.g. `15082010`); **forced change on first login** |
 | Parent | mobile `9000000001` (2 children) · `9000000002`…`08` | OTP **`000000`** (dev stub, also printed in the API console) |
 | Platform admin | `super` (no school code, API only) | `super12345` |
+
+## Deploy (free demo: Render + Cloudflare Pages; vision service stays local)
+- **Render** web service, root dir `backend`, build `pip install -r requirements.txt`, start `uvicorn app.main:app --host 0.0.0.0 --port $PORT`. Env: `SECRET_KEY` (long random), `SEED_DEMO=1`, `PYTHON_VERSION=3.12.3`, optional `CORS_ORIGINS` (exact Pages URL, comma-separated) and `DATABASE_URL`.
+- **Cloudflare Pages**, root dir `frontend`, build `npm ci && npm run build`, output `dist`. Env: `VITE_API_URL=https://<service>.onrender.com` (no trailing `/api`).
 
 ## Tests & build
 ```bash
