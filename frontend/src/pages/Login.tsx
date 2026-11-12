@@ -9,7 +9,7 @@ import { Card } from "@/components/ui/card";
 import { Field } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { post } from "@/lib/api";
-import { homePath, useAuth } from "@/lib/auth";
+import { firstLogin, homePath, useAuth } from "@/lib/auth";
 import type { TokenOut } from "@/lib/types";
 import { cn } from "@/lib/utils";
 
@@ -38,6 +38,7 @@ export default function Login() {
   const [otpSent, setOtpSent] = useState(false);
 
   const done = (r: TokenOut) => {
+    firstLogin.password = r.must_change_password ? password : "";
     setSession(r);
     nav(r.must_change_password ? "/change-password" : homePath(r.user.role), { replace: true });
   };

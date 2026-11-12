@@ -29,3 +29,6 @@ export const useAuth = create<AuthState>()(
 );
 
 export const homePath = (role: Role) => `/${role === "superadmin" ? "admin" : role}`;
+
+/** Password just used to sign in, held in memory only (never persisted) so the forced-change screen can prefill "current password". */
+export const firstLogin = { password: "" };

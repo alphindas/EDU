@@ -149,3 +149,27 @@ def test_student_login_after_password_change_and_neighbours_unaffected(client):
         assert client.get(path, headers=h).status_code == 200, path
     other = login("EN-26-002", "22032010")  # untouched neighbour still on DOB + forced change
     assert other.status_code == 200 and other.json()["must_change_password"] is True
+
+
+def test_demo_login_to_forced_change_works_for_every_student(client, Session):
+    """Regression (demo-login -> 'Set new password' -> 'Current password is wrong'): the demo button uses the real login
+    endpoint, and the DOB password it fills in must also be accepted as the CURRENT password on the forced-change screen,
+    for every seeded student in every school. Also pins the stored hash to the documented DDMMYYYY format."""
+    from app.models import School, Student
+    from app.security import verify_password
+
+    with Session() as db:
+        db.info["school_id"] = None
+        codes = {sc.id: sc.code for sc in db.scalars(select(School))}
+        rows = [(codes[st.school_id], st.user.login_id, st.dob.strftime("%d%m%Y"), st.user.password_hash,
+                 st.user.must_change_password) for st in db.scalars(select(Student))]
+    assert {code for code, *_ in rows} == {"EDN01", "OTHER"} and len(rows) >= 18
+    assert ("EDN01", "EN-26-001", "15082010") in {(c, a, pw) for c, a, pw, *_ in rows}  # the string the README/demo button use
+    for code, adm, pw, hashed, must_change in rows:
+        assert verify_password(pw, hashed) and must_change is True, (code, adm)  # seed hash <-> DDMMYYYY
+        r = client.post("/api/auth/login", json={"school_code": code, "role": "student", "login_id": adm, "password": pw})
+        assert r.status_code == 200 and r.json()["must_change_password"] is True, (code, adm)
+        h = {"Authorization": f"Bearer {r.json()['access_token']}"}
+        c = client.post("/api/auth/change-password", headers=h, json={"old_password": pw, "new_password": "NewPass#123"})
+        assert c.status_code == 200, (code, adm, c.text)  # the reported failure: 400 "Current password is wrong"
+        assert c.json()["must_change_password"] is False

@@ -72,6 +72,7 @@
     "title": "Set a new password",
     "subtitle": "For your security, choose a new password before continuing.",
     "old": "Current password",
+    "oldHint": "The password you just signed in with.",
     "new": "New password",
     "confirm": "Confirm new password",
     "mismatch": "Passwords do not match",
