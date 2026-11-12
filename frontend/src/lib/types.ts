@@ -106,3 +106,21 @@ export interface ReportCardData {
   subjects: SubjectResult[]; overall_percentage: number | null; overall_grade: string | null; progress: ProgressPoint[]; topics: TopicStat[];
   homework: { total: number; submitted: number; reviewed: number; late: number };
 }
+
+// ---------------------------------------------------------------- Phase 4: AI learning
+export interface PracticeQuestion { question_id: number; qtype: QType; text: string; options: string[]; topic: string; marks: number }
+export interface RoboOut { mode: "explain" | "why_wrong" | "next"; text: string; provider: string; cached: boolean; practice: PracticeQuestion | null }
+export interface PracticeCheck { is_correct: boolean; correct_answer: QAnswer; explanation: string }
+export interface AiMessage { id: number; role: "user" | "assistant"; content: string; sources: { document_id: number; name: string; snippet: string }[]; attachment_id: number | null; provider: string; created_at: string }
+export interface AiConversation { id: number; title: string; created_at: string; updated_at: string }
+export interface AiConversationDetail extends AiConversation { messages: AiMessage[] }
+export interface AiDocument { id: number; name: string; content_type: string; chunk_count: number; readable: boolean; created_at: string }
+export interface ChatTurn { user_message: AiMessage; assistant_message: AiMessage; document: AiDocument | null }
+export interface MasteryTopic { subject_id: number; subject: string; topic: string; correct: number; total: number; mastery: number; level: "weak" | "ok" | "strong" }
+export interface MasteryReport { student_id: number; topics: MasteryTopic[]; weak_count: number }
+export interface PlanItem { id: number; day: number; kind: "revise" | "practice" | "flashcards" | "maintain" | "start" | "rest"; topic: string; subject_id: number | null; subject: string; minutes: number; difficulty: "easy" | "medium"; done: boolean }
+export interface LearningPlan { id: number; student_id: number; week_start: string; items: PlanItem[]; stale: boolean; due_cards: number }
+export interface GapTopic { subject_id: number; subject: string; topic: string; students_attempted: number; weak_students: number; avg_mastery: number; weak_list: { student_id: number; name: string; mastery: number }[] }
+export interface Flashcard { id: number; subject_id: number | null; topic: string; front: string; back: string; source: "manual" | "mistakes" | "notes"; ease: number; interval_days: number; repetitions: number; lapses: number; due_date: string; last_reviewed: string | null }
+export interface FlashcardGen { created: number; skipped_duplicates: number; cards: Flashcard[] }
+export interface FlashcardStats { total: number; due: number; new: number; learned: number }

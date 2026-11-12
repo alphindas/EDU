@@ -31,6 +31,11 @@ class Settings(BaseSettings):
     # AI question generation. "stub" = offline deterministic PDF parser (no model call).
     llm_provider: str = "stub"
 
+    # Phase 4 AI (tutor / chat / flashcards / embeddings). "stub" = offline deterministic implementation, no external call.
+    ai_provider: str = "stub"
+    ai_daily_limit: int = 100  # AI calls per user per UTC day (cached robo answers don't count)
+    ai_max_doc_chars: int = 200_000
+
     # Teachers may (re)mark attendance this many days back; admins may correct any past date.
     teacher_backdate_days: int = 7
 

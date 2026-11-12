@@ -436,3 +436,119 @@ class Mark(TenantMixin, Base):
     marks: Mapped[float | None] = mapped_column(Float, nullable=True)
     absent: Mapped[bool] = mapped_column(Boolean, default=False)
     remarks: Mapped[str] = mapped_column(String(200), default="")
+
+
+# ------------------------------------------------------------------ Phase 4: AI learning
+class AiConversation(TenantMixin, Base):
+    """AI Chat thread. Private to its owner (student or teacher)."""
+
+    __tablename__ = "ai_conversations"
+    id: Mapped[int] = mapped_column(primary_key=True)
+    user_id: Mapped[int] = mapped_column(ForeignKey("users.id"), index=True)
+    title: Mapped[str] = mapped_column(String(120), default="")
+    messages: Mapped[list["AiMessage"]] = relationship(
+        back_populates="conversation", cascade="all, delete-orphan", order_by="AiMessage.id"
+    )
+
+
+class AiMessage(TenantMixin, Base):
+    __tablename__ = "ai_messages"
+    id: Mapped[int] = mapped_column(primary_key=True)
+    conversation_id: Mapped[int] = mapped_column(ForeignKey("ai_conversations.id"), index=True)
+    role: Mapped[str] = mapped_column(String(10))  # user | assistant
+    content: Mapped[str] = mapped_column(Text)
+    sources: Mapped[list] = mapped_column(JSON, default=list)  # [{document_id, name, snippet}] the answer was grounded in
+    attachment_id: Mapped[int | None] = mapped_column(ForeignKey("ai_documents.id", ondelete="SET NULL"), nullable=True)
+    provider: Mapped[str] = mapped_column(String(20), default="")  # which AI backend wrote an assistant message
+    conversation: Mapped[AiConversation] = relationship(back_populates="messages")
+
+
+class AiDocument(TenantMixin, Base):
+    """A file the user uploaded to AI Chat. Its text is chunked + embedded for retrieval (private to the owner)."""
+
+    __tablename__ = "ai_documents"
+    id: Mapped[int] = mapped_column(primary_key=True)
+    user_id: Mapped[int] = mapped_column(ForeignKey("users.id"), index=True)
+    name: Mapped[str] = mapped_column(String(200))
+    content_type: Mapped[str] = mapped_column(String(80))
+    file_path: Mapped[str] = mapped_column(String(300))
+    text: Mapped[str] = mapped_column(Text, default="")  # empty for images / scanned PDFs (no OCR yet)
+    chunk_count: Mapped[int] = mapped_column(Integer, default=0)
+
+
+class AiChunk(TenantMixin, Base):
+    __tablename__ = "ai_chunks"
+    id: Mapped[int] = mapped_column(primary_key=True)
+    document_id: Mapped[int] = mapped_column(ForeignKey("ai_documents.id"), index=True)
+    user_id: Mapped[int] = mapped_column(ForeignKey("users.id"), index=True)
+    position: Mapped[int] = mapped_column(Integer, default=0)
+    text: Mapped[str] = mapped_column(Text)
+    embedding: Mapped[list] = mapped_column(JSON)  # swap for pgvector on Postgres
+    embed_model: Mapped[str] = mapped_column(String(40))  # chunks from another embedder are ignored by retrieval
+
+
+class AiCall(TenantMixin, Base):
+    """Audit + rate-limit log: one row per AI call that reached the provider interface."""
+
+    __tablename__ = "ai_calls"
+    id: Mapped[int] = mapped_column(primary_key=True)
+    user_id: Mapped[int] = mapped_column(ForeignKey("users.id"), index=True)
+    kind: Mapped[str] = mapped_column(String(20))  # robo | chat | flashcards
+    provider: Mapped[str] = mapped_column(String(20))
+
+
+class RoboHelp(TenantMixin, Base):
+    """Cached robo-assistant answer for one wrong answer + mode (explain | why_wrong | next)."""
+
+    __tablename__ = "robo_help"
+    __table_args__ = (UniqueConstraint("answer_id", "mode", "lang"),)
+    id: Mapped[int] = mapped_column(primary_key=True)
+    answer_id: Mapped[int] = mapped_column(ForeignKey("attempt_answers.id"), index=True)
+    mode: Mapped[str] = mapped_column(String(12))
+    lang: Mapped[str] = mapped_column(String(2), default="en")
+    text: Mapped[str] = mapped_column(Text)
+    provider: Mapped[str] = mapped_column(String(20), default="")
+
+
+class TopicMastery(TenantMixin, Base):
+    """Correct-rate per student per (subject, topic), derived from graded quiz answers. Below WEAK_BELOW = weak topic."""
+
+    __tablename__ = "topic_mastery"
+    __table_args__ = (UniqueConstraint("student_id", "subject_id", "topic"),)
+    id: Mapped[int] = mapped_column(primary_key=True)
+    student_id: Mapped[int] = mapped_column(ForeignKey("students.id"), index=True)
+    subject_id: Mapped[int] = mapped_column(ForeignKey("subjects.id"))
+    topic: Mapped[str] = mapped_column(String(100))
+    correct: Mapped[int] = mapped_column(Integer, default=0)
+    total: Mapped[int] = mapped_column(Integer, default=0)
+    mastery: Mapped[float] = mapped_column(Float, default=0.0)  # percent
+
+
+class LearningPlan(TenantMixin, Base):
+    """One plan per student per week (Monday start). items: [{id, day 0-6, kind, topic, subject_id, minutes, difficulty, done}]."""
+
+    __tablename__ = "learning_plans"
+    __table_args__ = (UniqueConstraint("student_id", "week_start"),)
+    id: Mapped[int] = mapped_column(primary_key=True)
+    student_id: Mapped[int] = mapped_column(ForeignKey("students.id"), index=True)
+    week_start: Mapped[date] = mapped_column(Date)
+    items: Mapped[list] = mapped_column(JSON, default=list)
+
+
+class Flashcard(TenantMixin, Base):
+    """A student's card with SM-2 scheduling state (ease, interval, repetitions, due date)."""
+
+    __tablename__ = "flashcards"
+    id: Mapped[int] = mapped_column(primary_key=True)
+    student_id: Mapped[int] = mapped_column(ForeignKey("students.id"), index=True)
+    subject_id: Mapped[int | None] = mapped_column(ForeignKey("subjects.id"), nullable=True)
+    topic: Mapped[str] = mapped_column(String(100), default="")
+    front: Mapped[str] = mapped_column(Text)
+    back: Mapped[str] = mapped_column(Text)
+    source: Mapped[str] = mapped_column(String(10), default="manual")  # manual | mistakes | notes
+    ease: Mapped[float] = mapped_column(Float, default=2.5)
+    interval_days: Mapped[int] = mapped_column(Integer, default=0)
+    repetitions: Mapped[int] = mapped_column(Integer, default=0)
+    lapses: Mapped[int] = mapped_column(Integer, default=0)
+    due_date: Mapped[date] = mapped_column(Date, index=True)
+    last_reviewed: Mapped[date | None] = mapped_column(Date, nullable=True)

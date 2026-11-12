@@ -6,7 +6,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from .config import get_settings
 from .db import Base, engine
 from .routers import (
-    attendance, auth, exams, homework, idcard, leave, notifications, people, quizzes, reports, structure, timetable,
+    ai_chat, ai_learn, attendance, auth, exams, homework, idcard, leave, notifications, people, quizzes, reports, structure, timetable,
 )
 
 
@@ -16,7 +16,7 @@ async def lifespan(_: FastAPI):
     yield
 
 
-app = FastAPI(title="EduNest API", version="0.3.0", lifespan=lifespan)
+app = FastAPI(title="EduNest API", version="0.4.0", lifespan=lifespan)
 app.add_middleware(
     CORSMiddleware,
     allow_origins=get_settings().cors_origins,
@@ -25,7 +25,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 for r in (auth.router, structure.router, people.router, attendance.router, timetable.router, homework.router,
-          leave.router, idcard.router, notifications.router, quizzes.router, exams.router, reports.router):
+          leave.router, idcard.router, notifications.router, quizzes.router, exams.router, reports.router, ai_chat.router, ai_learn.router):
     app.include_router(r, prefix="/api")
 
 

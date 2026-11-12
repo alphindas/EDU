@@ -154,6 +154,9 @@ def _populate(client, code):
     eid = client.post("/api/exams", headers=tch, json=exam_body(client, adm)).json()["id"]
     client.post(f"/api/exams/{eid}/papers", headers=tch, data={"kind": "paper"}, files={"file": ("p.pdf", make_pdf(["x"]), "application/pdf")})
     fill_marks(client, tch, eid, {"EN-26-001": 30})
+    from tests.test_ai import populate_ai  # Phase 4: robo, mastery, plan, flashcards, chat, notes, AI call log
+
+    populate_ai(client, adm, tch, stu)
     return dict(qid=qid, aid=play["attempt_id"], eid=eid, adm=adm, tch=tch, stu=stu, par=par, sec=sec, st=st, up=up, hw=hw, sub=sub, lv=lv, period=period, entry=entry,
                 notif=notif, maths=maths)  # fmt: skip
 
@@ -170,7 +173,8 @@ def test_phase2_orm_guard_every_tenant_table(Session, two_schools):
     phase2 = {m.Notification, m.AttendanceSession, m.AttendanceRecord, m.Period, m.TimetableEntry, m.TimetableUpload, m.Homework,
               m.HomeworkSubmission, m.LeaveRequest, m.LeaveApproval}  # fmt: skip
     phase3 = {m.Quiz, m.QuizQuestion, m.QuizAttempt, m.AttemptAnswer, m.Exam, m.ExamPaper, m.Mark}
-    assert phase2 | phase3 <= set(models)
+    phase4 = {m.AiConversation, m.AiMessage, m.AiDocument, m.AiChunk, m.AiCall, m.RoboHelp, m.TopicMastery, m.LearningPlan, m.Flashcard}
+    assert phase2 | phase3 | phase4 <= set(models)
     with Session() as db:
         sid_a = db.scalar(select(m.School.id).where(m.School.code == "EDN01"))
         for cls in models:

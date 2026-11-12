@@ -13,6 +13,7 @@ from .config import get_settings
 
 IMAGE = {"image/png": "png", "image/jpeg": "jpg", "image/webp": "webp"}
 DOC = {"application/pdf": "pdf"}
+TEXT = {"text/plain": "txt"}
 AUDIO = {"audio/ogg": "ogg", "audio/webm": "webm", "audio/mpeg": "mp3", "audio/wav": "wav", "audio/mp4": "m4a"}
 
 
@@ -34,8 +35,17 @@ def _sniff(data: bytes) -> str | None:
             im.verify()
             fmt = (im.format or "").upper()
     except (UnidentifiedImageError, OSError, SyntaxError, ValueError):
-        return None
+        return "text/plain" if _is_text(data) else None
     return {"PNG": "image/png", "JPEG": "image/jpeg", "WEBP": "image/webp"}.get(fmt)
+
+
+def _is_text(data: bytes) -> bool:
+    """Plain UTF-8 text (no NULs). Only honoured by callers that list TEXT in `allowed`; served as text/plain + nosniff."""
+    try:
+        txt = data.decode("utf-8")
+    except UnicodeDecodeError:
+        return False
+    return "\x00" not in txt
 
 
 def save_upload(school_id: int, category: str, f: UploadFile, allowed: dict[str, str]) -> tuple[str, str, str]:

@@ -4,6 +4,7 @@ import { type FormEvent, useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { EmptyState, ErrorState, Loading, PageHeader } from "@/components/common/bits";
 import WithChild from "@/components/common/ChildPicker";
+import RoboHelp from "@/components/common/RoboHelp";
 import { toast, toastError } from "@/components/common/toast";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -211,6 +212,7 @@ function Grader({ a, onDone }: { a: AnswerResult; onDone: () => void }) {
 
 function AttemptView({ attemptId, canGrade, onChanged }: { attemptId: number; canGrade: boolean; onChanged?: () => void }) {
   const { t } = useTranslation();
+  const role = useAuth((s) => s.user!.role);
   const qc = useQueryClient();
   const q = useQuery({ queryKey: ["attempt", attemptId], queryFn: () => get<AttemptResult>(`/attempts/${attemptId}`) });
   if (q.isLoading) return <Loading />;
@@ -237,6 +239,7 @@ function AttemptView({ attemptId, canGrade, onChanged }: { attemptId: number; ca
           ) : null}
           <p className="mt-1 text-xs text-mute">{a.marks_awarded ?? "—"} / {a.marks} {t("quiz.marks").toLowerCase()}{a.topic && ` · ${a.topic}`}</p>
           {a.explanation && <p className="mt-2 rounded-lg bg-soft p-2 text-sm">{a.explanation}</p>}
+          {role === "student" && a.is_correct === false && a.answer_id > 0 && <RoboHelp answerId={a.answer_id} />}
           {a.feedback && !canGrade && <p className="mt-2 text-sm"><b>{t("quiz.feedback")}:</b> {a.feedback}</p>}
           {canGrade && a.qtype === "descriptive" && a.answer_id > 0 && a.your_answer !== null && a.your_answer !== "" && (
             <Grader a={a} onDone={() => { qc.invalidateQueries({ queryKey: ["attempt", attemptId] }); qc.invalidateQueries({ queryKey: ["quiz-attempts"] }); qc.invalidateQueries({ queryKey: ["quizzes"] }); onChanged?.(); }} />

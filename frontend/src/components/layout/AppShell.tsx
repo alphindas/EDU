@@ -1,5 +1,5 @@
 import {
-  Award, Baby, BookOpenCheck, CalendarCheck, CalendarDays, CalendarOff, ClipboardList, FileQuestion, GraduationCap, IdCard, LayoutDashboard, LogOut, Moon, NotebookPen,
+  Award, Baby, Bot, BrainCircuit, Layers, Target, BookOpenCheck, CalendarCheck, CalendarDays, CalendarOff, ClipboardList, FileQuestion, GraduationCap, IdCard, LayoutDashboard, LogOut, Moon, NotebookPen,
   Palette, ScanLine, School, Settings, Sun, Users, UsersRound,
 } from "lucide-react";
 import type { ReactNode } from "react";
@@ -41,6 +41,8 @@ const NAV: Record<string, Item[]> = {
     { to: "/teacher/quizzes", key: "nav.quizzes", icon: I(FileQuestion) },
     { to: "/teacher/exams", key: "nav.exams", icon: I(ClipboardList) },
     { to: "/teacher/report-card", key: "nav.reportCards", icon: I(Award) },
+    { to: "/teacher/gaps", key: "nav.gaps", icon: I(Target) },
+    { to: "/teacher/ai-chat", key: "nav.aiChat", icon: I(Bot) },
     { to: "/teacher/leave", key: "nav.leave", icon: I(CalendarOff) },
     { to: "/teacher/id-verify", key: "nav.idVerify", icon: I(ScanLine) },
   ],
@@ -52,6 +54,9 @@ const NAV: Record<string, Item[]> = {
     { to: "/student/quizzes", key: "nav.quizzes", icon: I(FileQuestion) },
     { to: "/student/exams", key: "nav.exams", icon: I(ClipboardList) },
     { to: "/student/report-card", key: "nav.reportCard", icon: I(Award) },
+    { to: "/student/ai-chat", key: "nav.aiChat", icon: I(Bot) },
+    { to: "/student/learning", key: "nav.learning", icon: I(BrainCircuit) },
+    { to: "/student/flashcards", key: "nav.flashcards", icon: I(Layers) },
     { to: "/student/leave", key: "nav.leave", icon: I(CalendarOff) },
     { to: "/student/id-card", key: "nav.idCard", icon: I(IdCard) },
   ],
@@ -63,6 +68,7 @@ const NAV: Record<string, Item[]> = {
     { to: "/parent/quizzes", key: "nav.quizzes", icon: I(FileQuestion) },
     { to: "/parent/exams", key: "nav.exams", icon: I(ClipboardList) },
     { to: "/parent/report-card", key: "nav.reportCard", icon: I(Award) },
+    { to: "/parent/learning", key: "nav.learning", icon: I(BrainCircuit) },
     { to: "/parent/leave", key: "nav.leave", icon: I(CalendarOff) },
     { to: "/parent/id-card", key: "nav.idCard", icon: I(IdCard) },
   ],

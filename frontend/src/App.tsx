@@ -19,6 +19,10 @@ import AdminTimetable from "@/pages/admin/Timetable";
 import ParentAttendance from "@/pages/parent/Attendance";
 import ParentIdCard from "@/pages/parent/IdCard";
 import ParentTimetable from "@/pages/parent/Timetable";
+import AiChatPage from "@/pages/shared/AiChat";
+import LearningPage from "@/pages/shared/Learning";
+import StudentFlashcards from "@/pages/student/Flashcards";
+import TeacherGaps from "@/pages/teacher/Gaps";
 import ExamsPage from "@/pages/shared/Exams";
 import HomeworkPage from "@/pages/shared/Homework";
 import IdVerifyPage from "@/pages/shared/IdVerify";
@@ -77,6 +81,8 @@ export default function App() {
         <Route path="quizzes" element={<QuizzesPage />} />
         <Route path="exams" element={<ExamsPage />} />
         <Route path="report-card" element={<ReportCardPage />} />
+        <Route path="gaps" element={<TeacherGaps />} />
+        <Route path="ai-chat" element={<AiChatPage />} />
         <Route path="leave" element={<LeavePage />} />
         <Route path="id-verify" element={<IdVerifyPage />} />
       </Route>
@@ -88,6 +94,9 @@ export default function App() {
         <Route path="quizzes" element={<QuizzesPage />} />
         <Route path="exams" element={<ExamsPage />} />
         <Route path="report-card" element={<ReportCardPage />} />
+        <Route path="ai-chat" element={<AiChatPage />} />
+        <Route path="learning" element={<LearningPage />} />
+        <Route path="flashcards" element={<StudentFlashcards />} />
         <Route path="leave" element={<LeavePage />} />
         <Route path="id-card" element={<StudentIdCard />} />
       </Route>
@@ -99,6 +108,7 @@ export default function App() {
         <Route path="quizzes" element={<QuizzesPage />} />
         <Route path="exams" element={<ExamsPage />} />
         <Route path="report-card" element={<ReportCardPage />} />
+        <Route path="learning" element={<LearningPage />} />
         <Route path="leave" element={<LeavePage />} />
         <Route path="id-card" element={<ParentIdCard />} />
       </Route>
