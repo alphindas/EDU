@@ -1,13 +1,8 @@
-node_modules/
 .venv/
+node_modules/
 __pycache__/
 *.pyc
 *.db
-.env
 dist/
-.pytest_cache/
-frontend/*.tsbuildinfo
+.env
 services/vision/backend/id_data/snapshots/
-services/vision/backend/attendance_files/
-services/vision/backend/New_face_db/
-uploads/

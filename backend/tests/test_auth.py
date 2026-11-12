@@ -130,3 +130,22 @@ def test_success_resets_failure_counter_and_message_has_wait_time(client):
 def test_many_successful_logins_never_lock_out(client):
     good = {"school_code": "EDN01", "role": "admin", "login_id": "admin", "password": "admin123"}
     assert all(client.post("/api/auth/login", json=good).status_code == 200 for _ in range(25))
+
+
+def test_student_login_after_password_change_and_neighbours_unaffected(client):
+    """Regression: a student who finished the forced change logs in with the NEW password (flag cleared, later-phase
+    endpoints reachable); the DOB stops working for that student only, other students keep their DOB password."""
+    def login(adm, pw):
+        return client.post("/api/auth/login", json={"school_code": "EDN01", "role": "student", "login_id": adm, "password": pw})
+
+    r = login("EN-26-001", "15082010")
+    h = {"Authorization": f"Bearer {r.json()['access_token']}"}
+    assert client.post("/api/auth/change-password", headers=h, json={"old_password": "15082010", "new_password": "NewPass#123"}).status_code == 200
+    assert login("EN-26-001", "15082010").status_code == 401  # DOB dead for this student
+    r = login("EN-26-001", "NewPass#123")
+    assert r.status_code == 200 and r.json()["must_change_password"] is False
+    h = {"Authorization": f"Bearer {r.json()['access_token']}"}
+    for path in ("/api/auth/me", "/api/report-card", "/api/ai/mastery", "/api/ai/plan", "/api/ai/flashcards/stats", "/api/quizzes"):
+        assert client.get(path, headers=h).status_code == 200, path
+    other = login("EN-26-002", "22032010")  # untouched neighbour still on DOB + forced change
+    assert other.status_code == 200 and other.json()["must_change_password"] is True
