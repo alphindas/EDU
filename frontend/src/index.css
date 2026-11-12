@@ -1,0 +1,50 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+Telugu:wght@400;600&family=Noto+Sans+Devanagari:wght@400;600&display=swap");
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Design tokens carried over from the vision demo: navy dark theme, blue/violet accent, soft cards. HSL triplets. */
+:root {
+  --bg: 220 40% 97%;
+  --card: 0 0% 100%;
+  --ink: 222 55% 15%;
+  --mute: 220 18% 45%;
+  --line: 220 30% 91%;
+  --soft: 220 90% 96%;
+  --shadow: 222 55% 15%;
+  --ac: 217 91% 60%;
+  --ac2: 255 100% 68%;
+  --ok: 160 75% 36%;
+  --warn: 41 82% 49%;
+  --bad: 350 72% 56%;
+}
+.dark {
+  --bg: 222 62% 9%;
+  --card: 222 52% 15%;
+  --ink: 222 80% 95%;
+  --mute: 222 25% 68%;
+  --line: 222 40% 22%;
+  --soft: 222 50% 19%;
+  --shadow: 222 80% 2%;
+}
+[data-accent="forest"] { --ac: 155 70% 38%; --ac2: 74 62% 55%; }
+[data-accent="sunset"] { --ac: 17 88% 57%; --ac2: 40 88% 58%; }
+[data-accent="violet"] { --ac: 255 100% 68%; --ac2: 290 100% 68%; }
+[data-accent="rose"]   { --ac: 340 72% 56%; --ac2: 15 100% 68%; }
+
+@layer base {
+  * { @apply border-line; }
+  html { font-family: Inter, "Noto Sans Telugu", "Noto Sans Devanagari", ui-sans-serif, system-ui, sans-serif; }
+  body { @apply bg-bg text-ink antialiased; }
+  :focus-visible { @apply outline-none ring-2 ring-primary/60 ring-offset-2 ring-offset-bg; }
+}
+@layer components {
+  .grad-text { @apply bg-gradient-to-r from-primary to-accent2 bg-clip-text text-transparent; }
+  .grad-bg { background-image: linear-gradient(135deg, hsl(var(--ac)), hsl(var(--ac2))); }
+}
+
+@media print {
+  aside, header, nav { display: none !important; }
+  .lg\:grid { display: block !important; }
+  body { background: #fff !important; }
+}

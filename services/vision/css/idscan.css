@@ -1,0 +1,31 @@
+/* EduNest – Smart ID Scan. Reuses the sa-* (Smart Attendance) stage, pills and stat cards. */
+.sa-stat.b .ico{background:#e0495e26;color:var(--bad)}
+
+.id-list{max-height:620px;overflow:auto;margin:0 -6px;padding:0 6px}
+.id-v{display:flex;align-items:center;gap:12px;flex-wrap:wrap;padding:11px 12px;border-radius:16px;border:1px solid var(--line);background:color-mix(in srgb,var(--card) 92%,transparent);transition:border-color .25s,background .25s,transform .15s}
+.id-v+.id-v{margin-top:8px}
+.id-v:hover{transform:translateY(-1px)}
+.id-v.pending{border-color:#e8a31766;background:color-mix(in srgb,var(--warn) 8%,var(--card))}
+.id-v.fined{border-color:#e0495e55;background:color-mix(in srgb,var(--bad) 7%,var(--card))}
+.id-v.waived{opacity:.72}
+.id-pic{flex:none;line-height:0}
+.id-snap{width:42px;height:42px;border-radius:12px;object-fit:cover;border:1px solid var(--line);background:var(--soft)}
+.id-end{display:flex;flex-direction:column;align-items:flex-end;gap:3px;margin-left:auto}
+.id-act{display:flex;gap:6px;flex-wrap:wrap;flex-basis:100%;justify-content:flex-end}
+
+.id-chip{display:inline-block;border-radius:99px;padding:4px 12px;font-size:12px;font-weight:700;border:1px solid transparent;white-space:nowrap}
+.id-chip.warn{background:#e8a31726;color:var(--warn);border-color:#e8a31744}
+.id-chip.bad{background:#e0495e26;color:var(--bad);border-color:#e0495e44}
+.id-chip.ok{background:#17a67326;color:var(--ok);border-color:#17a67344}
+
+.id-check{display:flex;align-items:center;gap:10px;margin-top:12px;font-size:14px;cursor:pointer}
+.id-check input{width:18px;height:18px;accent-color:var(--ac)}
+.id-list-plain{margin:8px 0 0;padding-left:18px;line-height:1.6}
+.id-list-plain li+li{margin-top:4px}
+
+@media(max-width:640px){
+  .id-v{padding:10px}
+  .id-end{align-items:flex-start;margin-left:0;flex-direction:row;gap:8px;flex-basis:100%}
+  .id-act{justify-content:flex-start}
+}
+@media print{.id-act{display:none}}

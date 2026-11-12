@@ -1,0 +1,5 @@
+/home/alphi/projects/edunest/docs/BLUEPRINT.md
+/home/alphi/projects/edunest/services/vision/README.md
+/home/alphi/projects/edunest/services/vision/backend/requirements-demo.txt
+/home/alphi/projects/edunest/services/vision/backend/requirements.txt
+/home/alphi/projects/edunest/services/vision/index.html
