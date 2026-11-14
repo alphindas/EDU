@@ -1,0 +1,14 @@
+# Demo mode (DEMO_MODE=1) needs only:
+flask>=3.0
+# Real face recognition:
+numpy
+opencv-python
+insightface
+onnxruntime            # use onnxruntime-gpu instead if USE_GPU=1
+hikvisionapi           # only for CAMERA_MODE=hikvision
+requests
+tqdm
+# Optional timetable automation (SCHEDULER=1):
+apscheduler
+# Smart ID Scan (ID-card detection):
+ultralytics            # YOLOv8 person + ID-card detectors

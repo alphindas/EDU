@@ -1,0 +1,963 @@
+{
+  "tagline": "Learn · Explore · Innovate · Grow",
+  "common": {
+    "allFeatures": "All features",
+    "deleted": "Deleted",
+    "menu": "Menu",
+    "more": "More",
+    "seeAll": "See all",
+    "send": "Send",
+    "skip": "Skip to content"
+  },
+  "login": {
+    "chittiHi": "Hi! I'm CHITTI, your learning buddy. Ready to explore?",
+    "heroTitle2": "A school portal that feels like an adventure",
+    "heroBody2": "Learn with CHITTI, earn badges, grow your brain power, and keep everyone connected: students, teachers, parents and admins."
+  },
+  "nav": {
+    "home": "Home",
+    "chitti": "CHITTI",
+    "adventure": "Adventure",
+    "brain": "Brain Gym",
+    "english": "English Chitti",
+    "career": "Career Lab",
+    "library": "Library",
+    "messages": "Messages",
+    "forum": "Doubt board",
+    "counselling": "Talk to someone",
+    "projects": "Projects",
+    "growth": "Personal growth",
+    "bus": "My bus",
+    "announcements": "Announcements",
+    "insights": "Class insights",
+    "intelligence": "School intelligence",
+    "transport": "Transport",
+    "safety": "Safety & audit",
+    "parentChitti": "Parent CHITTI",
+    "progress": "Growth & progress"
+  },
+  "navg": {
+    "home": "Start",
+    "learn": "Learn",
+    "school": "School life",
+    "connect": "Connect",
+    "academics": "Academics",
+    "people": "People",
+    "manage": "Manage"
+  },
+  "welcome": {
+    "0": "Every day is a new opportunity to learn!",
+    "1": "Your curiosity is your superpower.",
+    "2": "Small steps every day make big dreams come true.",
+    "3": "Mistakes are proof that you are trying. Keep going!",
+    "4": "Ask questions. Smart people always do.",
+    "5": "Today is a great day to discover something new.",
+    "6": "You are braver than you think and smarter than you know.",
+    "streak": "Wow, a {{n}}-day streak! You're on fire! 🔥"
+  },
+  "home": {
+    "checkin": "Daily check-in",
+    "checkedIn": "Checked in today",
+    "attSub": "This term",
+    "dueSoon": "Due soon",
+    "allClear": "All clear! Nothing due.",
+    "week": "My learning week",
+    "tileChitti": "Ask anything, any language",
+    "tileAdventure": "Worlds, quests & badges",
+    "tileBrain": "Fun brain games",
+    "tileLearning": "Weak topics & weekly plan",
+    "tileEnglish": "Speak with confidence",
+    "tileAttendance": "Your attendance history",
+    "tileLibrary": "Books, notes & papers",
+    "tileCareer": "Dream big, plan smart"
+  },
+  "chitti": {
+    "ask": "Ask CHITTI",
+    "open": "Open CHITTI",
+    "sub": "Your friendly AI buddy. Type or speak in any language!",
+    "parentSub": "Understand your child's lessons, in your language.",
+    "teacherSub": "Lesson plans, revision material and quick answers.",
+    "online": "Smart mode ({{p}})",
+    "offline": "Offline mode",
+    "offlineTag": "offline answer",
+    "tabChat": "Chat",
+    "tabTopic": "Topic explorer",
+    "tabPhoto": "Photo doubt",
+    "newChat": "New chat",
+    "history": "History",
+    "thinking": "CHITTI is thinking…",
+    "readAloud": "Read aloud",
+    "autoRead": "Read every answer aloud",
+    "listening": "Listening…",
+    "attach": "Attach a photo, PDF or notes",
+    "voice": "Speak",
+    "placeholder": "Ask anything… (Shift+Enter for a new line)",
+    "safety": "CHITTI can make mistakes. It prefers your school's material and says 'I'm not sure' when unsure. Chats are visible to teachers for safety.",
+    "consentTitle": "CHITTI is sleeping 😴",
+    "consentBody": "Ask your parent to switch on CHITTI from the Parent portal. Then we can learn together!",
+    "topicPlaceholder": "Type a topic: photosynthesis, fractions, Mars…",
+    "explore": "Explore",
+    "example": "Example:",
+    "videos": "Watch & learn",
+    "videoNote": "Links open YouTube search results. Watch with a grown-up nearby.",
+    "practiceN": "Practise {{n}} questions",
+    "topicIdeas": [
+      "Photosynthesis",
+      "Solar system",
+      "Fractions",
+      "Water cycle",
+      "Tenses",
+      "Pythagoras theorem",
+      "Electricity",
+      "The cell"
+    ],
+    "mode": {
+      "study_buddy": "Study Buddy",
+      "doubt_solver": "Doubt Solver",
+      "english": "English Chitti",
+      "aptitude": "Aptitude",
+      "puzzle": "Puzzle Master",
+      "career": "Career Chitti",
+      "parent": "Parent helper",
+      "lesson_plan": "Lesson planner"
+    },
+    "hello": {
+      "study_buddy": "Hi! What shall we learn today? Ask me to explain anything, step by step.",
+      "doubt_solver": "Stuck on a question? Type it (or attach a photo) and I'll solve it step by step.",
+      "english": "Let's practise English! Write a sentence and I'll help you make it shine.",
+      "aptitude": "Ready for some brain-sharpening? Give me a reasoning or number problem.",
+      "puzzle": "I love riddles! Want one? 🧩",
+      "career": "Curious about what you could become? Let's explore together.",
+      "parent": "Namaste! Ask me about what your child is learning, and I'll explain it simply with home activity ideas.",
+      "lesson_plan": "Hello teacher! Tell me the class, subject and topic, and I'll draft a lesson plan or question set."
+    },
+    "starters": {
+      "study_buddy": [
+        "Explain photosynthesis",
+        "What is gravity?",
+        "Teach me fractions"
+      ],
+      "doubt_solver": [
+        "Solve 2x + 3 = 11",
+        "What is 15% of 240?",
+        "Solve x^2 - 5x + 6 = 0"
+      ],
+      "english": [
+        "i goes to school by bus",
+        "He don't like apples",
+        "We was very happy yesterday"
+      ],
+      "aptitude": [
+        "Solve 3(x - 2) = x + 4",
+        "12 + 3 * 4"
+      ],
+      "puzzle": [
+        "Give me a riddle",
+        "Another riddle please!"
+      ],
+      "career": [
+        "What careers use maths?",
+        "How do I become a scientist?"
+      ],
+      "parent": [
+        "Explain the water cycle simply",
+        "How can I help with fractions at home?"
+      ],
+      "lesson_plan": [
+        "Lesson plan: Light reflection, class 10",
+        "10 questions on tenses"
+      ]
+    },
+    "tabTalk": "Talk"
+  },
+  "photo": {
+    "title": "Snap a doubt",
+    "sub": "Take a photo of a textbook or notebook question. CHITTI reads it and solves it step by step.",
+    "camera": "Camera",
+    "gallery": "Gallery",
+    "typeHint": "…or type / fix the question here",
+    "solve": "Solve it",
+    "reading": "Reading…",
+    "empty": "Your step-by-step solution will appear here.",
+    "readText": "I read:",
+    "practice": "Practise similar questions"
+  },
+  "practice": {
+    "q": "Question {{n}} of {{total}}",
+    "correct": "Correct! 🎉",
+    "notQuite": "Not quite.",
+    "next": "Next",
+    "finish": "Finish",
+    "restart": "Try again",
+    "perfect": "Perfect score! You're a star! 🌟",
+    "good": "Nice work! A little more practice and you'll master it.",
+    "tryAgain": "Good effort! Read the explanations and try again.",
+    "none": "No practice questions for this one yet."
+  },
+  "fun": {
+    "celebrate": "Celebration",
+    "levelUp": "Level {{n}} reached!",
+    "newBadge": "New badge unlocked!",
+    "keepGoing": "Keep learning, keep growing!",
+    "yay": "Yay!"
+  },
+  "game": {
+    "title": "Knowledge Adventure",
+    "level": "Level",
+    "streak": "Streak",
+    "days": "days",
+    "coins": "Coins",
+    "best": "best {{n}}",
+    "freezeHelp": "Streak savers: miss one day and your streak is safe. Earn one every 7 days.",
+    "todayQuests": "Today's quests",
+    "claim": "Claim!",
+    "claimed": "Claimed",
+    "inProgress": "In progress",
+    "mystery": "Mystery box",
+    "mysterySub": "3 surprise questions. Open once a day!",
+    "openMystery": "Open the box",
+    "mysteryDone": "Come back tomorrow!",
+    "worlds": "Adventure worlds",
+    "worldsSub": "Earn XP in each subject to unlock stages. Beat a boss challenge for big rewards!",
+    "stage": "Stage {{n}}/{{total}}",
+    "boss": "Boss challenge",
+    "bossOf": "Boss of {{world}}",
+    "bossSub": "5 puzzles. Get 4 right to win!",
+    "bossWon": "You defeated the boss! 🐉",
+    "bossTry": "Great try! Every attempt makes you stronger.",
+    "bossDoneToday": "You already beat this boss today. Play for practice!",
+    "badges": "Badges",
+    "teams": "House teams",
+    "leaderboard": "Weekly leaderboard",
+    "showMe": "Show me",
+    "lbPrivacy": "Only students who choose to appear are shown ({{n}} kept private). Teams always count everyone's effort.",
+    "shop": "CHITTI's dress-up shop",
+    "shopSub": "Spend knowledge coins on fun looks for your buddy.",
+    "wear": "Wear",
+    "wearing": "Wearing",
+    "bought": "Bought! Now wear it.",
+    "realWorld": "Real-world missions",
+    "realWorldSub": "Fun things to try away from the screen, with family and friends."
+  },
+  "level": {
+    "curious_seed": "Curious Seed",
+    "little_sprout": "Little Sprout",
+    "bright_explorer": "Bright Explorer",
+    "brave_adventurer": "Brave Adventurer",
+    "star_scholar": "Star Scholar",
+    "knowledge_knight": "Knowledge Knight",
+    "wisdom_wizard": "Wisdom Wizard",
+    "galaxy_genius": "Galaxy Genius",
+    "edunest_legend": "EduNest Legend"
+  },
+  "world": {
+    "science": "Science World",
+    "math": "Math Kingdom",
+    "language": "Language Land",
+    "innovation": "Innovation Island",
+    "brain": "Brain Power Arena"
+  },
+  "team": {
+    "sky_hawks": "Sky Hawks",
+    "mint_turtles": "Mint Turtles",
+    "sun_foxes": "Sun Foxes",
+    "lavender_owls": "Lavender Owls"
+  },
+  "quest": {
+    "quiz1": "Finish 1 quiz",
+    "brain5": "Solve 5 brain puzzles",
+    "flash10": "Review 10 flashcards",
+    "english1": "Practise English once",
+    "reflect1": "Write a reflection",
+    "chitti3": "Ask CHITTI 3 questions",
+    "hw1": "Hand in homework",
+    "mystery1": "Open the mystery box"
+  },
+  "badge": {
+    "first_explorer": {
+      "name": "First Explorer",
+      "desc": "Start your adventure"
+    },
+    "knowledge_seeker": {
+      "name": "Knowledge Seeker",
+      "desc": "Finish 10 quizzes or questions"
+    },
+    "math_master": {
+      "name": "Math Master",
+      "desc": "Earn 300 XP in Math Kingdom"
+    },
+    "word_wizard": {
+      "name": "Word Wizard",
+      "desc": "Practise English 5 times"
+    },
+    "puzzle_champion": {
+      "name": "Puzzle Champion",
+      "desc": "Solve 25 brain puzzles"
+    },
+    "consistency_star": {
+      "name": "Consistency Star",
+      "desc": "Keep a 7-day streak"
+    },
+    "innovation_hero": {
+      "name": "Innovation Hero",
+      "desc": "Start or join a project"
+    },
+    "improvement_champion": {
+      "name": "Improvement Champion",
+      "desc": "Improve a quiz score by 15%"
+    },
+    "boss_slayer": {
+      "name": "Boss Slayer",
+      "desc": "Win a boss challenge"
+    },
+    "kindness_heart": {
+      "name": "Kindness Heart",
+      "desc": "Complete 5 growth missions"
+    },
+    "curious_mind": {
+      "name": "Curious Mind",
+      "desc": "Ask CHITTI 20 questions"
+    },
+    "early_bird": {
+      "name": "Early Bird",
+      "desc": "Check in on 5 days"
+    }
+  },
+  "shop": {
+    "hat_cap": "Cool cap",
+    "hat_crown": "Crown",
+    "hat_grad": "Grad hat",
+    "hat_party": "Party face",
+    "color_mint": "Mint paint",
+    "color_lavender": "Lavender paint",
+    "color_sun": "Sunny paint",
+    "color_coral": "Coral paint",
+    "pet_star": "Star pet",
+    "pet_rocket": "Rocket pet",
+    "pet_owl": "Owl pet",
+    "pet_cat": "Cat pet"
+  },
+  "mission": {
+    "shapes": {
+      "emoji": "🔺",
+      "title": "Shape hunt",
+      "body": "Find 10 shapes at home: circles, triangles, cubes… Draw them!"
+    },
+    "teach": {
+      "emoji": "👩‍🏫",
+      "title": "Be the teacher",
+      "body": "Teach a family member one thing you learnt today."
+    },
+    "measure": {
+      "emoji": "📏",
+      "title": "Footstep maths",
+      "body": "Measure your room in footsteps, then in centimetres. Compare!"
+    },
+    "plant": {
+      "emoji": "🌱",
+      "title": "Grow a seed",
+      "body": "Plant a seed and record its height every day for a week."
+    },
+    "story": {
+      "emoji": "📖",
+      "title": "Story swap",
+      "body": "Ask a grandparent for a story from their childhood. Retell it in English."
+    },
+    "kindness": {
+      "emoji": "💖",
+      "title": "Secret kindness",
+      "body": "Do something kind without being asked. Notice how it feels."
+    },
+    "recycle": {
+      "emoji": "♻️",
+      "title": "Waste detective",
+      "body": "Sort one day's waste at home into wet, dry and recyclable."
+    },
+    "stars": {
+      "emoji": "✨",
+      "title": "Sky watcher",
+      "body": "Look at the night sky. Can you spot the Moon's shape and a bright planet?"
+    }
+  },
+  "skill": {
+    "logical": "Logical thinking",
+    "numerical": "Number skills",
+    "pattern": "Patterns",
+    "memory": "Memory",
+    "problem": "Problem solving",
+    "spatial": "Spatial skills",
+    "verbal": "Word power",
+    "critical": "Critical thinking"
+  },
+  "brain": {
+    "kicker": "Knowledge Growth",
+    "title": "Brain Gym",
+    "sub": "Fun puzzles that grow 8 thinking skills. Puzzles get harder as you improve!",
+    "notIq": "This is a Learning Growth Score that shows practice and progress. It is not an IQ test and never labels anyone.",
+    "tryRecommended": "Try {{skill}}",
+    "recommended": "Try next",
+    "notTried": "Not tried yet",
+    "level": "Level {{n}}",
+    "memorise": "Remember these! {{n}}s",
+    "position": "position {{n}}",
+    "right": "Brilliant! ✨",
+    "wrong": "Good try!",
+    "next": "Next puzzle",
+    "history": "Weekly accuracy"
+  },
+  "eng": {
+    "title": "English Chitti",
+    "sub": "Speak, write and shine! Friendly feedback on grammar, words and fluency.",
+    "private": "Private: only you see your practice.",
+    "avg": "Average",
+    "tab": {
+      "speak": "Speak",
+      "write": "Write",
+      "pronounce": "Pronounce",
+      "interview": "Interview"
+    },
+    "noMic": "Voice isn't available in this browser. Try Chrome or Edge, or type instead.",
+    "challenge": "Challenge {{n}}",
+    "question": "Interview question",
+    "another": "Another",
+    "speak": "Speak",
+    "stop": "Stop",
+    "orType": "…or type your answer here",
+    "feedback": "Get feedback",
+    "writeTitle": "Write anything",
+    "writeHint": "Write a few sentences about your day…",
+    "checkGrammar": "Check my grammar",
+    "pronTitle": "Say it clearly",
+    "listenFirst": "Listen first",
+    "sayIt": "Say it",
+    "pronScore": "You got {{n}}% of the words clear!",
+    "waiting": "Speak or write something, and CHITTI will help you improve it.",
+    "words": "{{n}} words",
+    "wpm": "words/min",
+    "fillers": "{{n}} fillers",
+    "corrected": "Polished version",
+    "betterWords": "Better words:",
+    "progress": "My fluency over time"
+  },
+  "career": {
+    "title": "Career & Innovation Lab",
+    "sub": "Explore interests, try STEM activities, code, and find scholarships.",
+    "tab": {
+      "quiz": "Interest quiz",
+      "lab": "STEM lab",
+      "code": "Code quest",
+      "scholar": "Scholarships"
+    },
+    "quizTitle": "How much do you enjoy…?",
+    "see": "Show my career ideas",
+    "retake": "Take the quiz again",
+    "note": "These are directions to explore, not predictions. Interests grow and change. Talk to your teachers and family!",
+    "area": {
+      "build": "Building & Technology",
+      "think": "Science & Investigation",
+      "create": "Arts & Creativity",
+      "help": "Helping & Caring",
+      "lead": "Leading & Persuading",
+      "organise": "Organising & Finance"
+    },
+    "labDone": "Experiment complete!",
+    "projectIdeas": "Mini-project ideas",
+    "courses": "Skill courses",
+    "predict": "What will this print?",
+    "scholarTitle": "Scholarship finder",
+    "marks": "My last exam marks (%)",
+    "category": "Category",
+    "girl": "I am a girl student",
+    "find": "Find scholarships",
+    "cat": {
+      "general": "General",
+      "obc": "OBC",
+      "sc": "SC",
+      "st": "ST",
+      "minority": "Minority",
+      "disabled": "Person with disability"
+    },
+    "scholarEmpty": "Fill in your details to see matching scholarships.",
+    "noMatch": "No demo matches. Check the official portal for more.",
+    "portal": "National Scholarship Portal"
+  },
+  "lib": {
+    "title": "Library",
+    "sub": "Syllabus, notes, textbooks, previous papers, e-books and videos, all in one place.",
+    "upload": "Add material",
+    "search": "Search titles and text…",
+    "all": "All",
+    "empty": "Nothing here yet.",
+    "chapters": "{{n}} chapters",
+    "read": "Read",
+    "open": "Open",
+    "download": "Save offline",
+    "offline": "Download to read without internet",
+    "findIn": "Find in this book…",
+    "bookmarks": "Bookmarks",
+    "completed": "Completed",
+    "markDone": "Mark chapter done",
+    "aiTitle": "CHITTI's chapter summary",
+    "aiSub": "Key points and a mind-map of this chapter.",
+    "summarise": "Summarise",
+    "kind": {
+      "syllabus": "Syllabus",
+      "notes": "Notes",
+      "textbook": "Textbook",
+      "paper": "Previous paper",
+      "ebook": "E-book",
+      "video": "Video",
+      "audio": "Audio"
+    },
+    "uploadHint": "PDF text is split into chapters automatically (\"Chapter 1 …\" headings or pages). Students in that class will see it.",
+    "kindLabel": "Type",
+    "titleLabel": "Title",
+    "class": "Class",
+    "allClasses": "All classes",
+    "subject": "Subject",
+    "year": "Year",
+    "link": "Link (optional)",
+    "desc": "Short description",
+    "text": "Text (optional)",
+    "textHint": "Paste notes here. Use 'Chapter 1 …' lines to split chapters.",
+    "file": "File (optional)",
+    "fileHint": "PDF, text, image (OCR) or audio. Max 8 MB.",
+    "uploaded": "Added to the library"
+  },
+  "ann": {
+    "title": "Announcements",
+    "sub": "News from school.",
+    "new": "New announcement",
+    "empty": "No announcements yet.",
+    "pinned": "Pinned",
+    "aud": {
+      "all": "Everyone",
+      "students": "Students",
+      "teachers": "Teachers",
+      "parents": "Parents",
+      "staff": "Staff"
+    },
+    "titleLabel": "Title",
+    "body": "Message",
+    "audience": "Who should see it?",
+    "section": "Class / section",
+    "wholeSchool": "Whole school",
+    "pin": "Pin to the top",
+    "post": "Post",
+    "posted": "Announcement posted"
+  },
+  "msg": {
+    "title": "Messages",
+    "sub": "Chat with your teachers, students or parents.",
+    "noContacts": "No contacts yet.",
+    "pick": "Pick someone to chat with.",
+    "sayHi": "Say hello 👋",
+    "placeholder": "Type a message…",
+    "newFrom": "New message from {{name}}"
+  },
+  "forum": {
+    "title": "Doubt board",
+    "sub": "Ask doubts, share ideas and help classmates. Teachers keep it friendly.",
+    "ask": "Ask / share",
+    "search": "Search posts…",
+    "empty": "No posts yet. Be the first!",
+    "solved": "Solved",
+    "hidden": "Hidden by teacher",
+    "schoolWide": "Whole school",
+    "kind": {
+      "doubt": "Doubt",
+      "idea": "Idea",
+      "showcase": "Showcase"
+    },
+    "unsolve": "Mark unsolved",
+    "markSolved": "Mark solved",
+    "hide": "Hide",
+    "unhide": "Unhide",
+    "best": "Best answer",
+    "accept": "Best answer",
+    "replyHint": "Write a helpful reply…",
+    "kindRule": "Be kind. Explain, don't just give answers.",
+    "reply": "Reply",
+    "kindLabel": "Type",
+    "titleLabel": "Title",
+    "bodyLabel": "Details",
+    "post": "Post"
+  },
+  "counsel": {
+    "title": "Talk to someone",
+    "sub": "A safe, private space to share worries or complaints with the school counsellor.",
+    "hug": "Whatever you're feeling is okay. A trained counsellor will read and reply.",
+    "topicLabel": "What is it about?",
+    "message": "Your message",
+    "stayAnon": "Keep my name hidden",
+    "send": "Send to counsellor",
+    "privacy": "Only the school's counsellors can read this. Not your classmates, and not other teachers.",
+    "urgent": "If you feel unsafe right now, tell a trusted adult immediately, or call Childline 1098 (India, free, 24×7).",
+    "none": "No conversations yet.",
+    "anon": "Anonymous",
+    "counsellor": "Counsellor",
+    "student": "Student",
+    "you": "You",
+    "reply": "Write a reply…",
+    "close": "Reply & close",
+    "inbox": "Counselling inbox",
+    "inboxSub": "Private messages from students. Reply with care.",
+    "inboxEmpty": "No messages.",
+    "notCounsellor": "Only staff marked as counsellors (by the admin) can open this inbox.",
+    "topic": {
+      "talk": "Just want to talk",
+      "study_stress": "Study stress",
+      "friends": "Friends",
+      "complaint": "Complaint",
+      "other": "Something else"
+    },
+    "status": {
+      "open": "Open",
+      "closed": "Closed"
+    }
+  },
+  "proj": {
+    "title": "Project space",
+    "sub": "Build cool things together and show off your achievements.",
+    "tab": {
+      "projects": "Projects",
+      "portfolio": "My portfolio"
+    },
+    "new": "Start a project",
+    "empty": "No projects yet. Start one!",
+    "join": "Join team",
+    "leave": "Leave team",
+    "feedback": "Feedback",
+    "commentHint": "Write feedback…",
+    "name": "Project name",
+    "about": "What will you build?",
+    "category": "Category",
+    "team": "Max team size",
+    "create": "Create",
+    "cat": {
+      "science": "Science",
+      "coding": "Coding",
+      "art": "Art",
+      "social": "Social good",
+      "robotics": "Robotics",
+      "other": "Other"
+    },
+    "status": {
+      "open": "Looking for members",
+      "building": "Building",
+      "done": "Done!"
+    }
+  },
+  "port": {
+    "add": "Add achievement",
+    "empty": "Add certificates, sports, art and more.",
+    "kindLabel": "Type",
+    "titleLabel": "Title",
+    "details": "Details",
+    "date": "Date",
+    "file": "Photo / PDF",
+    "kind": {
+      "certificate": "Certificate",
+      "sports": "Sports",
+      "art": "Art",
+      "project": "Project",
+      "award": "Award",
+      "other": "Other"
+    }
+  },
+  "grow": {
+    "title": "Personal growth",
+    "sub": "Reflect, be kind, make good choices. Every small step counts.",
+    "private": "Private and voluntary. Nobody grades this.",
+    "reflectTitle": "Today's reflection",
+    "doneToday": "Done for today. Thank you!",
+    "mood": "How do you feel?",
+    "writeHint": "Write a few lines…",
+    "save": "Save reflection",
+    "missions": "Growth missions",
+    "missionsSub": "Tiny challenges for confidence, kindness and teamwork.",
+    "didIt": "I did it!",
+    "scenario": "What would you do?",
+    "scenGood": "Great choice!",
+    "scenThink": "Hmm, think again.",
+    "talk": "Something worrying you? You can always talk to a counsellor.",
+    "journal": "My journal",
+    "prompt": {
+      "proud": "What made you proud today?",
+      "learned": "What is one new thing you learnt today?",
+      "kind": "What kind thing did you do or see today?",
+      "tricky": "What was tricky today, and how did you handle it?",
+      "grateful": "Name three things you are grateful for.",
+      "tomorrow": "What is one small goal for tomorrow?"
+    },
+    "mission": {
+      "compliment": "Give someone a genuine compliment",
+      "ask_question": "Ask one question in class",
+      "help_home": "Help with a chore at home",
+      "plan_day": "Plan tomorrow in 3 steps",
+      "read_15": "Read for 15 minutes",
+      "screen_break": "Take a 20-minute screen break outdoors",
+      "thank_teacher": "Thank a teacher",
+      "include_friend": "Include someone who is alone",
+      "new_word": "Learn and use a new word",
+      "draw_feelings": "Draw how you feel today"
+    },
+    "area": {
+      "empathy": "Empathy",
+      "confidence": "Confidence",
+      "teamwork": "Teamwork",
+      "time_management": "Time management",
+      "healthy_habits": "Healthy habits",
+      "gratitude": "Gratitude",
+      "leadership": "Leadership",
+      "communication": "Communication",
+      "creativity": "Creativity"
+    },
+    "scen": {
+      "exhibition": {
+        "q": "Science exhibition tomorrow, and your teammate hasn't done their part. What do you do?",
+        "talk": "Talk to them kindly and ask what's wrong",
+        "do_all": "Do everything myself and stay angry",
+        "tell_teacher": "Complain to the teacher right away",
+        "share_roles": "Re-split the tasks together tonight",
+        "why": "Talking first and sharing the work keeps the team strong. Ask the teacher for help if it still doesn't work."
+      },
+      "left_out": {
+        "q": "A new student sits alone at lunch every day. What do you do?",
+        "ignore": "Ignore it",
+        "invite": "Invite them to join your group",
+        "laugh": "Laugh with friends about it",
+        "tell_later": "Mention it to someone next month",
+        "why": "A small invitation can change someone's whole day."
+      },
+      "exam_stress": {
+        "q": "Exams are in 3 days and you feel panicky. What's best?",
+        "all_night": "Study all night without breaks",
+        "plan_breaks": "Make a plan with short breaks and sleep",
+        "give_up": "Give up, it's too late",
+        "ask_help": "Ask a teacher or parent for help",
+        "why": "Rest and a simple plan help your brain remember more. Asking for help is smart."
+      },
+      "found_wallet": {
+        "q": "You find a wallet in the school corridor. What do you do?",
+        "keep": "Keep it",
+        "give_office": "Give it to the school office",
+        "spend": "Spend a little and return it",
+        "leave_it": "Leave it there",
+        "why": "Honesty builds trust. The office can find the owner."
+      }
+    }
+  },
+  "bus": {
+    "title": "My school bus",
+    "sub": "Live bus location and arrival time at your stop.",
+    "none": "No bus is assigned yet.",
+    "noVehicle": "No vehicle on this route yet.",
+    "state": {
+      "not_started": "Not started yet",
+      "on_route": "On the way",
+      "arrived": "Reached school"
+    },
+    "simulated": "Demo position (no live GPS)",
+    "yourStop": "Arriving at {{stop}} in",
+    "min": "min",
+    "passed": "The bus has passed {{stop}}.",
+    "map": "Bus route map",
+    "start": "Starts {{time}}"
+  },
+  "ins": {
+    "title": "Class insights",
+    "sub": "Where your students need support, and what to reteach.",
+    "allSubjects": "All subjects",
+    "noSections": "No sections assigned yet.",
+    "tab": {
+      "class": "Class performance",
+      "ai": "CHITTI oversight"
+    },
+    "aiSub": "Questions students asked CHITTI (for safety oversight). Answers are not stored here.",
+    "quizAvg": "Quiz average",
+    "attendance": "Attendance",
+    "completion": "Quiz completion",
+    "examAvg": "Exam average",
+    "improvement": "vs last exam",
+    "attention": "Need a check-in",
+    "topics": "Topic mastery",
+    "revisionQuiz": "Make revision quiz",
+    "revMade": "Draft revision quiz with {{n}} questions created. Review and publish it.",
+    "missed": "Most-missed questions",
+    "students": "Students",
+    "student": "Student",
+    "weak": "Topics to revisit",
+    "signals": "Signals",
+    "flag": {
+      "needs_support": "Needs support",
+      "low_attendance": "Low attendance",
+      "stopped_quizzes": "Stopped quizzes",
+      "improving": "Improving!"
+    },
+    "kindNote": "Signals suggest who might need a friendly check-in. They are never labels about ability.",
+    "quizzes": "Quizzes",
+    "done": "{{n}}% done",
+    "examTrend": "Exam averages"
+  },
+  "si": {
+    "title": "School intelligence",
+    "sub": "Data-driven decisions with kind, practical interventions.",
+    "allClasses": "All classes",
+    "class": "Class {{n}}",
+    "from": "From",
+    "to": "To",
+    "schoolAvg": "School average",
+    "attendance": "Attendance",
+    "completion": "Quiz completion",
+    "monitored": "Classes monitored",
+    "demoNote": "Demo school: the numbers come from illustrative seed data.",
+    "patterns": "Patterns & suggested actions",
+    "patternsSub": "Automatically spotted trends. Each comes with a supportive next step.",
+    "noPatterns": "No patterns yet. Great!",
+    "sections": "Sections compared",
+    "subjects": "Subjects",
+    "growth": "Learning growth over time",
+    "reteach": "Topics needing reteaching"
+  },
+  "pattern": {
+    "low_attendance_section": "Attendance in {{section}} is {{value}}%.",
+    "low_avg_section": "Quiz average in {{section}} is {{value}}%.",
+    "stopped_quizzes": "{{count}} student(s) in {{section}} haven't taken a quiz in 2 weeks.",
+    "attendance_performance": "In {{section}}, students who miss school score {{gap}} points lower on quizzes.",
+    "improving": "{{count}} student(s) in {{section}} improved by 15+ points!",
+    "struggling_subject": "{{subject}} quiz average is {{value}}%.",
+    "reteach_topic": "Topic \"{{topic}}\" has only {{value}}% mastery school-wide."
+  },
+  "action": {
+    "attendance_drive": "Call parents of frequent absentees and celebrate improved attendance.",
+    "remedial_sessions": "Plan short remedial sessions and practice quizzes.",
+    "gentle_checkin": "Class teacher: a gentle check-in to see if something is in the way.",
+    "attendance_buddy": "Pair absentees with a study buddy and share notes.",
+    "celebrate": "Celebrate their effort in assembly or the class group.",
+    "subject_review": "Review pacing with the subject team; add visual activities.",
+    "reteach": "Reteach with a new approach, then use the revision-quiz button."
+  },
+  "tr": {
+    "title": "Transport",
+    "sub": "Routes, buses and stops. Parents and students see live location.",
+    "routes": "Routes",
+    "routeName": "Route name",
+    "start": "Start time",
+    "stops": "Stops",
+    "stopsHint": "One per line: name, latitude, longitude, minutes from start",
+    "addRoute": "Add route",
+    "vehicles": "Buses",
+    "number": "Bus number",
+    "route": "Route",
+    "driver": "Driver",
+    "phone": "Phone",
+    "addVehicle": "Add bus",
+    "token": "GPS device token",
+    "gpsHint": "A GPS device posts to /api/transport/vehicles/{id}/location with header X-Device-Token. Without it, the position is simulated from the timetable.",
+    "assign": "Assign students",
+    "student": "Student",
+    "stop": "Stop",
+    "save": "Save"
+  },
+  "safe": {
+    "title": "Safety & audit",
+    "sub": "Who did what, who can read counselling messages, and how CHITTI is used.",
+    "audit": "Audit log",
+    "when": "When",
+    "who": "Who",
+    "action": "Action",
+    "path": "What",
+    "result": "Result",
+    "counsellors": "Counsellors",
+    "counsellorsSub": "Only these staff can read the counselling inbox.",
+    "ai": "CHITTI oversight"
+  },
+  "ph": {
+    "hello": "Here's how your children are doing today. Ask CHITTI anything about their lessons!",
+    "class": "Class {{c}}",
+    "leaveTitle": "Tell school about a leave",
+    "leaveSub": "Just write a message. We'll fill the form for you, and the class teacher decides.",
+    "leaveExample": "e.g. My child will not attend tomorrow due to a family function",
+    "understand": "Prepare request",
+    "checkDetails": "Please check the details",
+    "looksRight": "Here's what we understood",
+    "child": "Child",
+    "type": "Type",
+    "from": "From",
+    "to": "To",
+    "reason": "Reason",
+    "neverAuto": "This is a request. It is not approved until the class teacher approves it. You'll be notified.",
+    "sendTeacher": "Send to class teacher",
+    "leaveSent": "Sent to the class teacher",
+    "consentTitle": "CHITTI AI permission",
+    "consentSub": "Allow your child to use the CHITTI AI tutor. You can change this any time.",
+    "on": "Allowed",
+    "off": "Off",
+    "chittiTitle": "Parent CHITTI",
+    "chittiSub": "Get today's lesson explained simply, with home activity ideas."
+  },
+  "pp": {
+    "adventure": "Adventure progress",
+    "streak": "{{n}}-day streak (best {{b}})",
+    "english": "English practice",
+    "englishBody": "{{n}} practice sessions, average score {{avg}}.",
+    "englishNone": "No English practice yet.",
+    "englishPrivate": "Practice text is private to your child.",
+    "career": "Career interests",
+    "careerNone": "Your child hasn't taken the interest quiz yet."
+  },
+  "notif": {
+    "announcement": "📢 New announcement: {{title}}",
+    "new_message": "💬 New message from {{name}}",
+    "forum_reply": "{{name}} replied to “{{title}}”",
+    "counselling_new": "💗 A student sent a counselling message.",
+    "counselling_reply": "💗 The counsellor replied to you.",
+    "project_join": "{{name}} joined your project “{{title}}”",
+    "project_comment": "{{name}} commented on “{{title}}”",
+    "leave_parent_message": "Leave note from parent for {{name}} ({{from}} to {{to}}). Pending with the class teacher."
+  },
+  "talk": {
+    "title": "Talk with CHITTI",
+    "sub": "Speak naturally. CHITTI listens, thinks and talks back, like a phone call.",
+    "mode": "Mode",
+    "start": "Start talking",
+    "end": "End",
+    "stop": "Stop",
+    "interrupt": "Interrupt and speak",
+    "type": "Type instead",
+    "typeHere": "Type a message and press Enter…",
+    "idle": "Tap “Start talking” and say hello!",
+    "listening": "Listening… speak now",
+    "thinking": "Thinking…",
+    "speaking": "Speaking… tap CHITTI to interrupt",
+    "noHear": "I couldn't hear you. Tap “Start talking” to try again.",
+    "micBlocked": "The microphone is blocked. Allow microphone access from the browser address bar, then try again.",
+    "unsupported": "This browser can't listen yet. Please use Chrome or Edge, or type your message.",
+    "noSpeaker": "This browser can't speak replies aloud. You can still read them.",
+    "error": "Sorry, I couldn't reach the server. Please try again.",
+    "speed": "Voice speed",
+    "tip": "Tip: use Chrome or Edge in a quiet room and speak in {{lang}}. Change the language from the top bar.",
+    "transcript": "Conversation",
+    "clear": "Clear",
+    "empty": "Your conversation will appear here."
+  },
+  "palette": {
+    "title": "Colour theme",
+    "light": "Light",
+    "dark": "Dark",
+    "hint": "Your choice is saved on this device.",
+    "ocean": "Ocean",
+    "sky": "Sky",
+    "mint": "Mint",
+    "forest": "Forest",
+    "teal": "Teal",
+    "indigo": "Indigo",
+    "violet": "Violet",
+    "lavender": "Lavender",
+    "rose": "Rose",
+    "coral": "Coral",
+    "sunset": "Sunset",
+    "mango": "Mango"
+  }
+}

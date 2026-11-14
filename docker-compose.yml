@@ -1,0 +1,21 @@
+# docker compose up --build   ->  app http://localhost:5173 · API http://localhost:8000/docs · vision http://localhost:5000
+services:
+  backend:
+    build: { context: ., dockerfile: deploy/backend.Dockerfile }
+    ports: ["8000:8000"]
+    environment:
+      EDUNEST_SECRET_KEY: ${EDUNEST_SECRET_KEY:-change-me-in-any-real-deployment-32-bytes-min}
+      EDUNEST_CORS_ORIGINS: '["http://localhost:5173"]'
+      EDUNEST_VISION_URL: http://vision:5000
+    volumes: ["edunest-data:/data"]
+    depends_on: [vision]
+  vision:
+    build: { context: services/vision, dockerfile: ../../deploy/vision.Dockerfile }
+    ports: ["5000:5000"]
+    environment: { DEMO_MODE: "1", PORT: "5000" }
+  frontend:
+    build: { context: ., dockerfile: deploy/frontend.Dockerfile }
+    ports: ["5173:80"]
+    depends_on: [backend, vision]
+volumes:
+  edunest-data:

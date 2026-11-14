@@ -1,0 +1,4 @@
+# Minimum to run the whole portal + simulated AI (no camera, no models):
+flask>=3.0
+numpy
+opencv-python-headless

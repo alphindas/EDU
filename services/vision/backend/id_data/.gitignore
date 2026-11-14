@@ -1,0 +1,4 @@
+# keep violations.json / snapshots out of version control
+snapshots/
+violations.json
+contacts.csv
