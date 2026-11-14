@@ -38,7 +38,7 @@ staff = require_roles(Role.admin, Role.teacher)
 def teacher_out(t: Teacher, temp: str | None = None) -> TeacherOut:
     u = t.user
     return TeacherOut(
-        id=t.id, employee_id=t.employee_id, full_name=u.full_name, phone=u.phone, email=u.email,
+        id=t.id, user_id=t.user_id, employee_id=t.employee_id, full_name=u.full_name, phone=u.phone, email=u.email,
         qualification=t.qualification, joining_date=t.joining_date, photo_url=t.photo_url,
         is_active=u.is_active, temp_password=temp,
     )  # fmt: skip

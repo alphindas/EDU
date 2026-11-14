@@ -334,6 +334,11 @@ def submit_attempt(aid: int, body: SubmitIn, user: User = Depends(student_only),
         ok, marks = grade_answer(q, ans)
         a.answers.append(AttemptAnswer(school_id=sid, created_by=user.id, question_id=q.id, answer=ans, is_correct=ok, marks_awarded=marks))
     _recompute(a)
+    from .. import gamify  # EduNest 2.0: effort XP for finishing, bonus for accuracy; streak + badges update
+
+    p = pct(a.score, a.max_score) if a.status == "graded" else None
+    gamify.safe_award(db, sid, me.id, "quiz", 15 + (int(p // 10) if p is not None else 0), coins=5,
+                      world=gamify.subject_world(db, quiz.subject_id), meta={"quiz_id": quiz.id, "pct": p})
     db.commit()
     return _result(db, sid, a)
 

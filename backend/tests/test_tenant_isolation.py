@@ -157,6 +157,9 @@ def _populate(client, code):
     from tests.test_ai import populate_ai  # Phase 4: robo, mastery, plan, flashcards, chat, notes, AI call log
 
     populate_ai(client, adm, tch, stu)
+    from tests.test_v2 import populate_v2  # EduNest 2.0 tables
+
+    populate_v2(client, adm, tch, stu, par)
     return dict(qid=qid, aid=play["attempt_id"], eid=eid, adm=adm, tch=tch, stu=stu, par=par, sec=sec, st=st, up=up, hw=hw, sub=sub, lv=lv, period=period, entry=entry,
                 notif=notif, maths=maths)  # fmt: skip
 
@@ -178,7 +181,7 @@ def test_phase2_orm_guard_every_tenant_table(Session, two_schools):
     with Session() as db:
         sid_a = db.scalar(select(m.School.id).where(m.School.code == "EDN01"))
         for cls in models:
-            schools = {r for r in db.scalars(select(cls.school_id))}
+            schools = {r for r in db.scalars(select(cls.school_id)) if r is not None}  # audit_logs may hold platform rows (NULL)
             assert len(schools) == 2, f"{cls.__name__} has no rows in one of the schools (test would be vacuous)"
         db.info["school_id"] = sid_a
         for cls in models:

@@ -1,5 +1,7 @@
 import { useMutation } from "@tanstack/react-query";
-import { GraduationCap, KeyRound, ShieldCheck, Smartphone, Sparkles, User } from "lucide-react";
+import { GraduationCap, KeyRound, ShieldCheck, Smartphone, User } from "lucide-react";
+import { SchoolScene } from "@/components/fun/Art";
+import Chitti, { Bubble } from "@/components/fun/Chitti";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Navigate, useNavigate } from "react-router-dom";
@@ -60,32 +62,38 @@ export default function Login() {
 
   return (
     <div className="grid min-h-screen lg:grid-cols-[1.1fr_1fr]">
-      <section className="grad-bg relative hidden overflow-hidden p-12 text-white lg:flex lg:flex-col lg:justify-between">
-        <div className="absolute -right-24 -top-24 h-96 w-96 rounded-full bg-white/10 blur-3xl" />
-        <div className="absolute -bottom-32 -left-16 h-96 w-96 rounded-full bg-black/20 blur-3xl" />
-        <div className="relative flex items-center gap-2.5 text-xl font-extrabold"><GraduationCap /> EduNest</div>
-        <div className="relative max-w-md">
-          <Sparkles className="mb-4 opacity-80" />
-          <h1 className="text-4xl font-extrabold leading-tight">{t("login.heroTitle")}</h1>
-          <p className="mt-4 text-lg text-white/80">{t("login.heroBody")}</p>
-          <p className="mt-8 text-sm font-semibold tracking-wide text-white/70">{t("app.tagline")}</p>
+      <section className="relative hidden overflow-hidden bg-gradient-to-br from-[hsl(var(--hero1))] via-soft to-[hsl(var(--hero2))] p-10 lg:flex lg:flex-col lg:justify-between">
+        <div className="absolute -right-20 -top-24 h-96 w-96 rounded-full bg-white/40 blur-2xl" />
+        <Brand />
+        <div className="relative z-10 max-w-lg">
+          <div className="flex items-end gap-4">
+            <Chitti size={170} mood="wave" />
+            <Bubble className="mb-16 max-w-[15rem] text-navy">{t("login.chittiHi")}</Bubble>
+          </div>
+          <h1 className="mt-4 font-display text-5xl font-extrabold leading-[1.05] text-navy">{t("login.heroTitle2")}</h1>
+          <p className="mt-3 text-lg font-semibold text-navy/70">{t("login.heroBody2")}</p>
+          <div className="mt-5 flex flex-wrap gap-2">
+            {["🤖 CHITTI 2.0", "🎮 Knowledge Adventure", "🧠 Brain Gym", "🗣️ English Chitti", "🌐 5 languages"].map((x) => <span key={x} className="chip bg-white/80 py-1.5 text-sm text-navy shadow-card">{x}</span>)}
+          </div>
         </div>
+        <SchoolScene className="relative -mx-10 -mb-10 w-[calc(100%+5rem)]" />
+        <p className="absolute bottom-4 right-6 z-10 text-sm font-extrabold tracking-[.2em] text-white drop-shadow">{t("tagline")}</p>
       </section>
 
       <section className="relative flex items-center justify-center p-5">
         <div className="absolute right-4 top-4 flex items-center gap-1.5"><LangSwitcher /><ThemeControls /></div>
         <div className="w-full max-w-md">
           <Brand className="mb-8 lg:hidden" />
-          <h2 className="text-3xl font-extrabold tracking-tight">{t("login.title")}</h2>
+          <h2 className="font-display text-4xl font-extrabold tracking-tight">{t("login.title")} 👋</h2>
           <p className="mb-6 mt-1 text-mute">{t("login.subtitle")}</p>
 
           <Card className="p-6">
-            <div className="mb-5 grid grid-cols-4 gap-1.5 rounded-xl bg-soft p-1" role="tablist" aria-label={t("login.role")}>
+            <div className="mb-5 grid grid-cols-4 gap-1.5 rounded-2xl bg-soft p-1.5" role="tablist" aria-label={t("login.role")}>
               {ROLES.map(({ id, icon: Icon }) => (
                 <button
                   key={id} role="tab" aria-selected={role === id}
                   onClick={() => { setRole(id); setLoginId(""); setPassword(""); setOtpSent(false); loginM.reset(); }}
-                  className={cn("flex flex-col items-center gap-1 rounded-lg py-2 text-[11px] font-semibold transition", role === id ? "bg-card text-primary shadow-card" : "text-mute hover:text-ink")}
+                  className={cn("flex flex-col items-center gap-1 rounded-xl py-2.5 text-xs font-extrabold transition", role === id ? "bg-card text-primary shadow-card ring-2 ring-primary/30" : "text-mute hover:text-ink")}
                 >
                   <Icon size={17} />{t(`roles.${id}`)}
                 </button>

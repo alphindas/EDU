@@ -1,50 +1,102 @@
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+Telugu:wght@400;600&family=Noto+Sans+Devanagari:wght@400;600&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Nunito:wght@400;500;600;700;800;900&family=Noto+Sans+Telugu:wght@400;600;700&family=Noto+Sans+Devanagari:wght@400;600;700&family=Noto+Sans+Malayalam:wght@400;600;700&family=Noto+Sans+Tamil:wght@400;600;700&display=swap");
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* Design tokens carried over from the vision demo: navy dark theme, blue/violet accent, soft cards. HSL triplets. */
+/* EduNest 2.0 design tokens (HSL triplets). Light by default: warm cream paper, sky blue + navy, with sunny yellow,
+   mint and lavender as friendly secondaries. Feels like a school, not a corporate dashboard. */
 :root {
-  --bg: 220 40% 97%;
+  --bg: 210 40% 98%;
   --card: 0 0% 100%;
-  --ink: 222 55% 15%;
-  --mute: 220 18% 45%;
-  --line: 220 30% 91%;
-  --soft: 220 90% 96%;
-  --shadow: 222 55% 15%;
-  --ac: 217 91% 60%;
-  --ac2: 255 100% 68%;
-  --ok: 160 75% 36%;
-  --warn: 41 82% 49%;
-  --bad: 350 72% 56%;
+  --ink: 222 47% 18%;
+  --mute: 222 14% 46%;
+  --line: 214 25% 90%;
+  --soft: 199 95% 95%;
+  --shadow: 222 47% 18%;
+  --ac: 199 89% 48%;
+  --ac2: 222 62% 32%;
+  --navy: 222 62% 25%;
+  --sun: 45 97% 58%;
+  --mint: 158 55% 52%;
+  --lav: 258 75% 74%;
+  --coral: 12 86% 64%;
+  --ok: 152 60% 38%;
+  --warn: 36 92% 48%;
+  --bad: 352 72% 56%;
+  --hero1: 199 85% 90%;
+  --hero2: 199 85% 76%;
 }
 .dark {
-  --bg: 222 62% 9%;
-  --card: 222 52% 15%;
-  --ink: 222 80% 95%;
-  --mute: 222 25% 68%;
-  --line: 222 40% 22%;
-  --soft: 222 50% 19%;
+  --bg: 224 45% 10%;
+  --card: 224 40% 15%;
+  --ink: 210 40% 96%;
+  --mute: 220 20% 70%;
+  --line: 224 30% 23%;
+  --soft: 210 50% 20%;
   --shadow: 222 80% 2%;
 }
-[data-accent="forest"] { --ac: 155 70% 38%; --ac2: 74 62% 55%; }
-[data-accent="sunset"] { --ac: 17 88% 57%; --ac2: 40 88% 58%; }
-[data-accent="violet"] { --ac: 255 100% 68%; --ac2: 290 100% 68%; }
-[data-accent="rose"]   { --ac: 340 72% 56%; --ac2: 15 100% 68%; }
+/* 12 colour palettes. 'ocean' is the default (same as :root). Each sets the main colour (--ac), a deeper partner
+   (--ac2), the heading navy, and the soft hero/panel tints. Light-only tints are scoped to :not(.dark). */
+[data-accent="ocean"] { --ac: 199 89% 48%; --ac2: 222 62% 32%; --navy: 222 62% 25%; --hero1: 199 85% 90%; --hero2: 199 85% 76%; }
+html:not(.dark)[data-accent="ocean"] { --soft: 199 85% 95%; }
+[data-accent="sky"] { --ac: 205 85% 55%; --ac2: 215 60% 38%; --navy: 215 55% 24%; --hero1: 205 85% 90%; --hero2: 205 85% 76%; }
+html:not(.dark)[data-accent="sky"] { --soft: 205 85% 95%; }
+[data-accent="mint"] { --ac: 158 64% 40%; --ac2: 190 70% 30%; --navy: 175 60% 20%; --hero1: 158 64% 90%; --hero2: 158 64% 76%; }
+html:not(.dark)[data-accent="mint"] { --soft: 158 64% 95%; }
+[data-accent="forest"] { --ac: 142 55% 36%; --ac2: 150 45% 24%; --navy: 150 45% 18%; --hero1: 142 55% 90%; --hero2: 142 55% 76%; }
+html:not(.dark)[data-accent="forest"] { --soft: 142 55% 95%; }
+[data-accent="teal"] { --ac: 180 70% 36%; --ac2: 200 60% 28%; --navy: 195 55% 20%; --hero1: 180 70% 90%; --hero2: 180 70% 76%; }
+html:not(.dark)[data-accent="teal"] { --soft: 180 70% 95%; }
+[data-accent="indigo"] { --ac: 232 70% 56%; --ac2: 245 55% 34%; --navy: 238 50% 24%; --hero1: 232 70% 90%; --hero2: 232 70% 76%; }
+html:not(.dark)[data-accent="indigo"] { --soft: 232 70% 95%; }
+[data-accent="violet"] { --ac: 258 70% 60%; --ac2: 222 62% 32%; --navy: 250 50% 26%; --hero1: 258 70% 90%; --hero2: 258 70% 76%; }
+html:not(.dark)[data-accent="violet"] { --soft: 258 70% 95%; }
+[data-accent="lavender"] { --ac: 270 55% 64%; --ac2: 290 40% 42%; --navy: 275 40% 26%; --hero1: 270 55% 90%; --hero2: 270 55% 76%; }
+html:not(.dark)[data-accent="lavender"] { --soft: 270 55% 95%; }
+[data-accent="rose"] { --ac: 340 72% 56%; --ac2: 280 50% 40%; --navy: 300 40% 24%; --hero1: 340 72% 90%; --hero2: 340 72% 76%; }
+html:not(.dark)[data-accent="rose"] { --soft: 340 72% 95%; }
+[data-accent="coral"] { --ac: 6 80% 60%; --ac2: 350 55% 40%; --navy: 355 45% 24%; --hero1: 6 80% 90%; --hero2: 6 80% 76%; }
+html:not(.dark)[data-accent="coral"] { --soft: 6 80% 95%; }
+[data-accent="sunset"] { --ac: 17 88% 55%; --ac2: 340 60% 40%; --navy: 345 50% 25%; --hero1: 17 85% 90%; --hero2: 17 85% 76%; }
+html:not(.dark)[data-accent="sunset"] { --soft: 17 85% 95%; }
+[data-accent="mango"] { --ac: 38 92% 48%; --ac2: 22 80% 38%; --navy: 25 60% 22%; --hero1: 38 85% 90%; --hero2: 38 85% 76%; }
+html:not(.dark)[data-accent="mango"] { --soft: 38 85% 95%; }
 
 @layer base {
   * { @apply border-line; }
-  html { font-family: Inter, "Noto Sans Telugu", "Noto Sans Devanagari", ui-sans-serif, system-ui, sans-serif; }
-  body { @apply bg-bg text-ink antialiased; }
+  html { font-family: Nunito, "Noto Sans Telugu", "Noto Sans Devanagari", "Noto Sans Malayalam", "Noto Sans Tamil", ui-sans-serif, system-ui, sans-serif; }
+  body {
+    @apply bg-bg text-ink antialiased;
+    background-image:
+      radial-gradient(circle at 10% 0%, hsl(var(--ac) / .07), transparent 40%),
+      radial-gradient(circle at 95% 100%, hsl(var(--lav) / .08), transparent 40%);
+    background-attachment: fixed;
+  }
+  h1, h2, h3, .font-display { font-family: "Baloo 2", Nunito, "Noto Sans Telugu", "Noto Sans Devanagari", "Noto Sans Malayalam", "Noto Sans Tamil", sans-serif; }
   :focus-visible { @apply outline-none ring-2 ring-primary/60 ring-offset-2 ring-offset-bg; }
+  ::selection { background: hsl(var(--sun) / .5); }
 }
 @layer components {
   .grad-text { @apply bg-gradient-to-r from-primary to-accent2 bg-clip-text text-transparent; }
   .grad-bg { background-image: linear-gradient(135deg, hsl(var(--ac)), hsl(var(--ac2))); }
+  .grad-sun { background-image: linear-gradient(135deg, hsl(var(--sun)), hsl(var(--coral))); }
+  .grad-mint { background-image: linear-gradient(135deg, hsl(var(--mint)), hsl(var(--ac))); }
+  .grad-lav { background-image: linear-gradient(135deg, hsl(var(--lav)), hsl(var(--ac))); }
+  .grad-sky { background-image: linear-gradient(160deg, hsl(var(--hero1)), hsl(var(--hero2))); }
+  .chip { @apply inline-flex items-center gap-1 rounded-full px-2.5 py-0.5 text-xs font-bold; }
+  .lift { @apply transition duration-200 hover:-translate-y-0.5 hover:shadow-pop; }
+  .tile { @apply relative overflow-hidden rounded-3xl border border-line bg-card p-4 shadow-card; }
+  .prose-chat p { @apply mb-2 last:mb-0; }
+  .no-scrollbar::-webkit-scrollbar { display: none; }
+  .no-scrollbar { scrollbar-width: none; }
+  .spoiler { @apply rounded bg-ink/80 px-1 text-transparent transition hover:bg-transparent hover:text-ink; }
 }
 
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+}
 @media print {
-  aside, header, nav { display: none !important; }
+  aside, header, nav, .no-print { display: none !important; }
   .lg\:grid { display: block !important; }
   body { background: #fff !important; }
 }

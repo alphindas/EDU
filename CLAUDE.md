@@ -1,5 +1,7 @@
 # EduNest: map for future sessions
 
+> **EduNest 2.0 layer (Nov 2026):** `app/models_v2.py` (25 new tables), `providers.py` (OpenAI-compatible/Gemini/stub LLM wrapper), `chitti.py` (shared engine: modes, topic search, solver, English coach, career, parent-leave parser), `kb.py` (offline starter topics), `search.py` (BM25+embedding hybrid + rerank), `brain.py` (signed adaptive puzzles), `gamify.py` (XP/levels/streaks/badges/quests/shop/teams), `seed_v2.py` (illustrative demo data), routers `chitti, game, coach, content, community, transport, insights, ws`. Audit middleware in `main.py`. Frontend: `components/fun/*` (Chitti mascot, art, celebrations, puzzles), new pages under `pages/{student,shared,teacher,parent,admin}`, locales `i18n/locales/{en,te,hi,ml,ta}.json` + `v2/*.json` (deep-merged). Tests: `tests/test_v2.py`; 134 pass. Students need parent AI consent (`EDUNEST_REQUIRE_AI_CONSENT`, off in tests).
+
 4-role school portal (Admin/Teacher/Student/Parent) + AI layer. **Full spec: `docs/BLUEPRINT.md`** (read it before new phases; not repeated here).
 
 ## Stack

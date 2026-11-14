@@ -4,7 +4,7 @@ from typing import Literal
 
 from pydantic import BaseModel, ConfigDict, Field
 
-Lang = Literal["en", "te", "hi"]
+Lang = Literal["en", "te", "hi", "ml", "ta"]
 
 
 class ORM(BaseModel):

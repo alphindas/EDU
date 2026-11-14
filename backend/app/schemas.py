@@ -78,7 +78,7 @@ class TokenOut(BaseModel):
 class ProfilePatch(BaseModel):
     phone: str | None = None
     email: str | None = None
-    language: str | None = Field(default=None, pattern="^(en|te|hi)$")
+    language: str | None = Field(default=None, pattern="^(en|te|hi|ml|ta)$")
     alert_channels: list[str] | None = None  # parents
     emergency_contact: str | None = None  # parents
 
@@ -90,7 +90,7 @@ class SchoolIn(BaseModel):
     address: str = ""
     district: str = ""
     mandal: str = ""
-    default_language: str = Field(default="en", pattern="^(en|te|hi)$")
+    default_language: str = Field(default="en", pattern="^(en|te|hi|ml|ta)$")
     headmaster_name: str = ""
     headmaster_phone: str = ""
     admin_login: str = "admin"
@@ -117,7 +117,7 @@ class SchoolPatch(BaseModel):
     district: str | None = None
     mandal: str | None = None
     logo_url: str | None = None
-    default_language: str | None = Field(default=None, pattern="^(en|te|hi)$")
+    default_language: str | None = Field(default=None, pattern="^(en|te|hi|ml|ta)$")
     headmaster_name: str | None = None
     headmaster_phone: str | None = None
 
@@ -201,6 +201,7 @@ class TeacherPatch(BaseModel):
 
 class TeacherOut(ORM):
     id: int
+    user_id: int = 0
     employee_id: str
     full_name: str
     phone: str
@@ -224,7 +225,7 @@ class StudentIn(BaseModel):
     parent_name: str = ""
     parent_relation: str = ""
     address: str = ""
-    language: str = Field(default="en", pattern="^(en|te|hi)$")
+    language: str = Field(default="en", pattern="^(en|te|hi|ml|ta)$")
     category: str = ""
     medical_notes: str = ""
     photo_url: str = ""
@@ -248,7 +249,7 @@ class StudentPatch(BaseModel):
     parent_mobile: str | None = None
     parent_name: str | None = None
     address: str | None = None
-    language: str | None = Field(default=None, pattern="^(en|te|hi)$")
+    language: str | None = Field(default=None, pattern="^(en|te|hi|ml|ta)$")
     category: str | None = None
     medical_notes: str | None = None
     photo_url: str | None = None

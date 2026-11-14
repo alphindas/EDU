@@ -11,3 +11,6 @@ httpx==0.28.1
 qrcode[pil]==8.0
 pytest==8.3.4
 pypdf==5.1.0
+sympy==1.13.3
+pytesseract==0.3.13   # needs the tesseract binary (+ hin/tel/mal/tam traineddata for Indic OCR)
+# psycopg[binary]==3.2.3   # uncomment for PostgreSQL (EDUNEST_DATABASE_URL=postgresql+psycopg://...)

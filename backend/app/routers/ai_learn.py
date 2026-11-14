@@ -82,6 +82,9 @@ def _practice_pool(db: Session, sid: int, stu: Student, *, topic: str, subject_i
 @router.post("/robo", response_model=RoboOut)
 def robo(body: RoboIn, user: User = Depends(student_only), sid: int = Depends(tenant_id), db: Session = Depends(get_db),
          tutor: Tutor = Depends(get_tutor)):  # fmt: skip
+    from .v2util import require_consent
+
+    require_consent(db, user)
     me = _me(db, user)
     ans = get_or_404(db, AttemptAnswer, body.answer_id, sid)
     att = get_or_404(db, QuizAttempt, ans.attempt_id, sid)
@@ -308,6 +311,9 @@ def delete_card(cid: int, user: User = Depends(student_only), sid: int = Depends
 @router.post("/flashcards/generate", response_model=FlashcardGenOut)
 def generate_cards(body: FlashcardGenIn, user: User = Depends(student_only), sid: int = Depends(tenant_id), db: Session = Depends(get_db),
                    tutor: Tutor = Depends(get_tutor)):  # fmt: skip
+    from .v2util import require_consent
+
+    require_consent(db, user)
     me = _me(db, user)
     have = {c.front.strip().casefold() for c in db.scalars(select(Flashcard).where(Flashcard.student_id == me.id))}
     drafts: list[tuple[str, str, str, int | None, str]] = []  # front, back, topic, subject_id, source
@@ -362,6 +368,9 @@ def review_card(cid: int, body: ReviewIn, user: User = Depends(student_only), si
     c.lapses += 1 if lapsed else 0
     c.last_reviewed = date.today()
     c.due_date = date.today() + timedelta(days=c.interval_days)
+    from .. import gamify  # EduNest 2.0: small reward per review (capped by the daily quest design, not by score)
+
+    gamify.safe_award(db, sid, me.id, "flashcard", 2, coins=0, world=gamify.subject_world(db, c.subject_id) or "brain")
     db.commit()
     return c
 

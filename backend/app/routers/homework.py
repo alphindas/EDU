@@ -202,6 +202,10 @@ def submit(
     sub.status, sub.feedback, sub.grade, sub.reviewed_at = "submitted", "", "", None
     sub.submitted_at = datetime.now(timezone.utc)
     sub.is_late = date.today() > h.due_date
+    from .. import gamify  # EduNest 2.0: reward handing work in (a bit more when on time)
+
+    gamify.safe_award(db, sid, me.id, "homework", 12 if sub.is_late else 20, coins=4, world=gamify.subject_world(db, h.subject_id),
+                      meta={"homework_id": h.id})
     db.commit()
     return sub
 

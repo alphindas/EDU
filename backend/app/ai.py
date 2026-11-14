@@ -17,7 +17,7 @@ from fastapi import HTTPException, status
 
 from .config import get_settings
 
-LANGS = ("en", "te", "hi")
+LANGS = ("en", "te", "hi", "ml", "ta")
 
 
 # ------------------------------------------------------------------ data crossing the boundary
@@ -184,17 +184,86 @@ class StubTutor:
 
 
 # ------------------------------------------------------------------ provider selection
+class ProviderTutor(StubTutor):
+    """Real LLM behind the same Tutor interface (EduNest 2.0). Any provider failure falls back to the offline stub."""
+
+    def __init__(self, provider: str):
+        self.name = provider
+
+    def _ask(self, extra: str, prompt: str, lang: str, history: list[tuple[str, str]] | None = None) -> str | None:
+        from . import providers
+
+        try:
+            return providers.complete(providers.system_prompt(extra, lang), [*(history or []), ("user", prompt)])
+        except providers.LLMError:
+            return None
+
+    def explain(self, ctx: WrongAnswerCtx) -> str:
+        p = (f"Question: {ctx.question}\nOptions: {ctx.options}\nCorrect answer: {ctx.correct}\nTopic: {ctx.topic}\n"
+             f"Teacher explanation: {ctx.explanation or '(none)'}\nExplain the correct answer simply, with one example, then "
+             "list 2 focus points to revise.")
+        return self._ask("You are explaining a quiz answer to a student.", p, ctx.lang) or super().explain(ctx)
+
+    def why_wrong(self, ctx: WrongAnswerCtx) -> str:
+        p = (f"Question: {ctx.question}\nOptions: {ctx.options}\nStudent answered: {ctx.given or '(blank)'}\n"
+             f"Correct: {ctx.correct}\nExplain kindly why the student's answer is not right and what clue in the question "
+             "points to the correct one. Encourage them.")
+        return self._ask("You are a patient tutor.", p, ctx.lang) or super().why_wrong(ctx)
+
+    def chat(self, question, history, passages, attachments, lang="en") -> ChatReply:
+        ctx = "\n\n".join(f"[source: {p.document}]\n{p.text}" for p in passages)
+        att = "\n\n".join(f"[attached: {a.name}]\n{a.text[:6000]}" for a in attachments if a.text)
+        prompt = question
+        if ctx or att:
+            prompt = f"School material:\n{ctx}\n\n{att}\n\nQuestion: {question}"
+        out = self._ask("Ground your answer in the school material when it is relevant and cite it.", prompt, lang, history)
+        return ChatReply(out, passages) if out else super().chat(question, history, passages, attachments, lang)
+
+    def make_cards(self, text: str, topic: str = "", max_cards: int = 10) -> list[CardDraft]:
+        import json as _json
+
+        out = self._ask("Return ONLY a JSON list of objects with keys front and back.",
+                        f"Write up to {max_cards} short revision flashcards from this text:\n{text[:8000]}", "en")
+        try:
+            data = _json.loads(out[out.index("["): out.rindex("]") + 1]) if out else []
+            cards = [CardDraft(str(c["front"])[:300], str(c["back"])[:600], topic) for c in data if c.get("front") and c.get("back")]
+            return cards[:max_cards] or super().make_cards(text, topic, max_cards)
+        except (ValueError, KeyError, TypeError, AttributeError):
+            return super().make_cards(text, topic, max_cards)
+
+
+class ProviderEmbedder:
+    """OpenAI-compatible embeddings; falls back to hashing for a batch if the call fails (chunks keep their model tag)."""
+
+    def __init__(self, model: str):
+        self.name = model[:40]
+
+    def embed(self, texts: list[str]) -> list[list[float]]:
+        from . import providers
+
+        vecs = providers.embed_texts(texts)
+        if vecs is None:
+            raise HTTPException(status.HTTP_503_SERVICE_UNAVAILABLE, "Embedding provider unavailable")
+        return vecs
+
+
 def _check_provider() -> None:
+    from . import providers
+
     provider = get_settings().ai_provider
-    if provider != "stub":
-        raise HTTPException(status.HTTP_501_NOT_IMPLEMENTED, f"AI provider '{provider}' is not configured")
+    if provider != "stub" and not providers.configured():
+        raise HTTPException(status.HTTP_501_NOT_IMPLEMENTED, f"AI provider '{provider}' is not configured (set EDUNEST_AI_API_KEY)")
 
 
 def get_tutor() -> Tutor:
     _check_provider()
-    return StubTutor()
+    s = get_settings()
+    return StubTutor() if s.ai_provider == "stub" else ProviderTutor(s.ai_provider)
 
 
 def get_embedder() -> Embedder:
     _check_provider()
+    s = get_settings()
+    if s.ai_provider == "openai" and s.ai_embed_model:
+        return ProviderEmbedder(s.ai_embed_model)
     return HashEmbedder()

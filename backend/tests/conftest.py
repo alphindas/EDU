@@ -3,6 +3,7 @@ import os
 import tempfile
 
 os.environ["EDUNEST_BCRYPT_ROUNDS"] = "4"  # fast hashing in tests (must precede app imports)
+os.environ["EDUNEST_REQUIRE_AI_CONSENT"] = "0"  # older AI tests run without the consent gate; test_v2 switches it on
 os.environ["EDUNEST_UPLOAD_DIR"] = tempfile.mkdtemp(prefix="edunest-test-uploads-")
 
 import pytest
@@ -48,6 +49,9 @@ def client(Session):
 
     app.dependency_overrides[get_db] = override
     reset_rate_limits()
+    from app.routers.v2util import reset_burst
+
+    reset_burst()
     with Session() as db:
         db.add(User(school_id=None, role=Role.superadmin.value, login_id="super", full_name="Root",
                     password_hash=hash_password("super12345")))  # fmt: skip

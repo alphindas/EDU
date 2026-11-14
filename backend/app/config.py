@@ -56,6 +56,16 @@ class Settings(BaseSettings):
     ai_provider: str = "stub"
     ai_daily_limit: int = 100  # AI calls per user per UTC day (cached robo answers don't count)
     ai_max_doc_chars: int = 200_000
+    # EduNest 2.0: real model behind the provider-agnostic wrapper (app/providers.py). Empty key -> offline stub.
+    ai_api_key: str = Field("", validation_alias=AliasChoices("EDUNEST_AI_API_KEY", "OPENAI_API_KEY", "GEMINI_API_KEY"))
+    ai_model: str = ""
+    ai_base_url: str = "https://api.openai.com/v1"
+    ai_embed_model: str = ""  # e.g. text-embedding-3-small (OpenAI-compatible only); empty -> offline hash embeddings
+    ai_timeout_seconds: float = 40.0
+    ai_per_minute: int = 12  # burst limit per user on CHITTI endpoints (on top of the daily limit)
+    # Students may use CHITTI only after a parent gives consent (Parent portal -> Settings). Tests switch this off.
+    require_ai_consent: bool = True
+    ocr_lang: str = "eng+hin+tel+mal+tam"  # tesseract languages tried for photo doubts (missing packs are skipped)
 
     # Teachers may (re)mark attendance this many days back; admins may correct any past date.
     teacher_backdate_days: int = 7

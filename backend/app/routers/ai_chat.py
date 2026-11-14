@@ -91,7 +91,7 @@ def delete_conversation(cid: int, user: User = Depends(ai_user), sid: int = Depe
 def send_message(
     cid: int,
     text: str = Form(min_length=1, max_length=2000),
-    lang: str = Form("en", pattern="^(en|te|hi)$"),
+    lang: str = Form("en", pattern="^(en|te|hi|ml|ta)$"),
     file: UploadFile | None = File(None),
     user: User = Depends(ai_user),
     sid: int = Depends(tenant_id),
@@ -99,6 +99,9 @@ def send_message(
     tutor: Tutor = Depends(get_tutor),
     embedder: Embedder = Depends(get_embedder),
 ):
+    from .v2util import require_consent  # EduNest 2.0: students need parent consent for AI
+
+    require_consent(db, user)
     conv = _conv(db, sid, user, cid)
     question = text.strip()
     if not question:

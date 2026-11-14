@@ -19,7 +19,26 @@ import AdminTimetable from "@/pages/admin/Timetable";
 import ParentAttendance from "@/pages/parent/Attendance";
 import ParentIdCard from "@/pages/parent/IdCard";
 import ParentTimetable from "@/pages/parent/Timetable";
-import AiChatPage from "@/pages/shared/AiChat";
+import ChittiPage from "@/pages/shared/Chitti";
+import LibraryPage from "@/pages/shared/Library";
+import AnnouncementsPage from "@/pages/shared/Announcements";
+import MessagesPage from "@/pages/shared/Messages";
+import ForumPage from "@/pages/shared/Forum";
+import CounsellingPage from "@/pages/shared/Counselling";
+import ProjectsPage from "@/pages/shared/Projects";
+import BusPage from "@/pages/shared/Bus";
+import StudentHome from "@/pages/student/Home";
+import Adventure from "@/pages/student/Adventure";
+import BrainPage from "@/pages/student/Brain";
+import EnglishPage from "@/pages/student/English";
+import CareerPage from "@/pages/student/Career";
+import GrowthPage from "@/pages/student/Growth";
+import TeacherInsights from "@/pages/teacher/Insights";
+import ParentHome from "@/pages/parent/Home";
+import ParentProgress from "@/pages/parent/Progress";
+import Intelligence from "@/pages/admin/Intelligence";
+import TransportAdmin from "@/pages/admin/Transport";
+import Safety from "@/pages/admin/Safety";
 import LearningPage from "@/pages/shared/Learning";
 import StudentFlashcards from "@/pages/student/Flashcards";
 import TeacherGaps from "@/pages/teacher/Gaps";
@@ -71,6 +90,11 @@ export default function App() {
         <Route path="leave" element={<LeavePage />} />
         <Route path="id-verify" element={<IdVerifyPage />} />
         <Route path="settings" element={<Settings />} />
+        <Route path="intelligence" element={<Intelligence />} />
+        <Route path="library" element={<LibraryPage />} />
+        <Route path="announcements" element={<AnnouncementsPage />} />
+        <Route path="transport" element={<TransportAdmin />} />
+        <Route path="safety" element={<Safety />} />
       </Route>
       <Route path="/teacher" element={<Guard role="teacher" />}>
         <Route index element={<TeacherDashboard />} />
@@ -82,26 +106,54 @@ export default function App() {
         <Route path="exams" element={<ExamsPage />} />
         <Route path="report-card" element={<ReportCardPage />} />
         <Route path="gaps" element={<TeacherGaps />} />
-        <Route path="ai-chat" element={<AiChatPage />} />
+        <Route path="ai-chat" element={<ChittiPage />} />
         <Route path="leave" element={<LeavePage />} />
         <Route path="id-verify" element={<IdVerifyPage />} />
+        <Route path="insights" element={<TeacherInsights />} />
+        <Route path="chitti" element={<ChittiPage />} />
+        <Route path="library" element={<LibraryPage />} />
+        <Route path="announcements" element={<AnnouncementsPage />} />
+        <Route path="messages" element={<MessagesPage />} />
+        <Route path="forum" element={<ForumPage />} />
+        <Route path="projects" element={<ProjectsPage />} />
+        <Route path="counselling" element={<CounsellingPage />} />
       </Route>
       <Route path="/student" element={<Guard role="student" />}>
-        <Route index element={<StudentDashboard />} />
+        <Route index element={<StudentHome />} />
+        <Route path="profile" element={<StudentDashboard />} />
+        <Route path="chitti" element={<ChittiPage />} />
+        <Route path="adventure" element={<Adventure />} />
+        <Route path="brain" element={<BrainPage />} />
+        <Route path="english" element={<EnglishPage />} />
+        <Route path="career" element={<CareerPage />} />
+        <Route path="growth" element={<GrowthPage />} />
+        <Route path="library" element={<LibraryPage />} />
+        <Route path="announcements" element={<AnnouncementsPage />} />
+        <Route path="messages" element={<MessagesPage />} />
+        <Route path="forum" element={<ForumPage />} />
+        <Route path="projects" element={<ProjectsPage />} />
+        <Route path="counselling" element={<CounsellingPage />} />
+        <Route path="bus" element={<BusPage />} />
         <Route path="attendance" element={<StudentAttendance />} />
         <Route path="timetable" element={<StudentTimetable />} />
         <Route path="homework" element={<HomeworkPage />} />
         <Route path="quizzes" element={<QuizzesPage />} />
         <Route path="exams" element={<ExamsPage />} />
         <Route path="report-card" element={<ReportCardPage />} />
-        <Route path="ai-chat" element={<AiChatPage />} />
+        <Route path="ai-chat" element={<ChittiPage />} />
         <Route path="learning" element={<LearningPage />} />
         <Route path="flashcards" element={<StudentFlashcards />} />
         <Route path="leave" element={<LeavePage />} />
         <Route path="id-card" element={<StudentIdCard />} />
       </Route>
       <Route path="/parent" element={<Guard role="parent" />}>
-        <Route index element={<ParentDashboard />} />
+        <Route index element={<ParentHome />} />
+        <Route path="children" element={<ParentDashboard />} />
+        <Route path="chitti" element={<ChittiPage />} />
+        <Route path="progress" element={<ParentProgress />} />
+        <Route path="announcements" element={<AnnouncementsPage />} />
+        <Route path="messages" element={<MessagesPage />} />
+        <Route path="bus" element={<BusPage />} />
         <Route path="attendance" element={<ParentAttendance />} />
         <Route path="timetable" element={<ParentTimetable />} />
         <Route path="homework" element={<HomeworkPage />} />

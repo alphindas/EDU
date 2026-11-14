@@ -7,6 +7,7 @@ from datetime import date, time
 from sqlalchemy import select
 from sqlalchemy.orm import Session
 
+from . import models_v2  # noqa: F401  (create 2.0 tables too)
 from .db import Base, SessionLocal, engine
 from .models import (
     AcademicYear, Parent, Period, Role, School, SchoolClass, Section, Student, StudentParent, Subject, Teacher,
@@ -125,7 +126,10 @@ def ensure_demo_data() -> None:
             return
         db.add(User(school_id=None, role=Role.superadmin.value, login_id="super", full_name="Platform Admin",
                     password_hash=hash_password("super12345")))  # fmt: skip
-        seed_demo(db)
+        school = seed_demo(db)
+        from .seed_v2 import seed_v2
+
+        seed_v2(db, school)
 
 
 def main() -> None:
@@ -139,7 +143,11 @@ def main() -> None:
         return
     db.add(User(school_id=None, role=Role.superadmin.value, login_id="super", full_name="Platform Admin",
                 password_hash=hash_password("super12345")))  # fmt: skip
-    seed_demo(db)
+    school = seed_demo(db)
+    if "--no-demo-activity" not in sys.argv:
+        from .seed_v2 import seed_v2
+
+        seed_v2(db, school)  # illustrative 2.0 data: attendance history, quizzes, XP, library, transport ...
     print(f"""
 Seeded school code: {SCHOOL_CODE}
   superadmin  super        / super12345   (no school code)
@@ -147,6 +155,8 @@ Seeded school code: {SCHOOL_CODE}
   teacher     T-001        / teacher123   (also T-002, T-003)
   student     EN-26-001    / 15082010     (DOB DDMMYYYY, must change on first login; EN-26-001..009)
   parent      9000000001   / OTP 000000   (2 children); 9000000002..8 have 1 child each
+  counsellor  T-003 (Ms. Priya) can open the counselling inbox
+  Demo activity data is ILLUSTRATIVE (relative to today). Use --no-demo-activity for a clean school.
 """)
 
 

@@ -18,7 +18,7 @@ export default defineConfig({
     host: true,
     port: 5173,
     proxy: {
-      "/api": { target: api, changeOrigin: true },
+      "/api": { target: api, changeOrigin: true, ws: true }, // ws: CHITTI live messages + bus tracking
       "/vision": { target: vision, changeOrigin: true, rewrite: (p) => p.replace(/^\/vision/, "") },
     },
   },
