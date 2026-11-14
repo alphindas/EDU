@@ -3,6 +3,7 @@ import { Camera, ExternalLink, ImagePlus, Lightbulb, Loader2, Mic, MicOff, Paper
 import { type ReactNode, useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
+import { ErrorState, Loading } from "@/components/common/bits";
 import { toastError } from "@/components/common/toast";
 import { celebrate } from "@/components/fun/Celebrate";
 import Chitti, { Bubble } from "@/components/fun/Chitti";
@@ -70,6 +71,7 @@ export default function ChittiPage() {
           <button key={k} onClick={() => setTab(k)} className={cn("shrink-0 rounded-xl px-4 py-2 text-sm font-semibold transition", tab === k ? "bg-primary text-white shadow-sm" : "bg-card text-mute shadow-card hover:text-ink")}>{e} {t(l)}</button>
         ))}
       </div>
+      {(tab === "chat" || tab === "talk") && !st && (status.isError ? <ErrorState error={status.error} onRetry={() => status.refetch()} /> : <Loading />)}
       {tab === "chat" && st && <ChatTab modes={st.modes} lang={i18n.language} />}
       {tab === "talk" && st && <TalkTab modes={st.modes} lang={i18n.language} />}
       {tab === "topic" && <TopicTab lang={i18n.language} />}
